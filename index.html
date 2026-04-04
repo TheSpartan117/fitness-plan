@@ -249,13 +249,25 @@
   .day-card.open .day-body { display: block; }
   .ex-row {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
-    padding: 10px 0;
+    padding: 12px 0;
     border-bottom: 1px solid var(--border);
-    gap: 12px;
+    gap: 10px;
   }
   .ex-row:last-child { border-bottom: none; }
+  .ex-thumb {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .ex-thumb:hover { transform: scale(1.08); box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
+  .ex-info { flex: 1; min-width: 0; }
   .ex-name { font-size: 14px; font-weight: 500; }
   .ex-note { font-size: 12px; color: var(--muted); margin-top: 2px; }
   .ex-sets {
@@ -265,6 +277,28 @@
     white-space: nowrap;
     padding-top: 2px;
     flex-shrink: 0;
+  }
+  /* ── IMAGE MODAL ── */
+  .img-modal-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.85);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s;
+    padding: 20px;
+  }
+  .img-modal-overlay.show { opacity: 1; pointer-events: auto; }
+  .img-modal-overlay img {
+    max-width: 100%; max-height: 85vh;
+    border-radius: 14px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  }
+  .img-modal-close {
+    position: absolute; top: 16px; right: 20px;
+    background: rgba(255,255,255,0.12); border: none;
+    color: #fff; font-size: 24px; width: 40px; height: 40px;
+    border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
   }
   .rest-note {
     padding: 12px 0;
@@ -482,7 +516,7 @@
     <div class="section-label">Weekly schedule</div>
 
     <!-- Day 1 -->
-    <div class="day-card open" id="d1">
+    <div class="day-card" id="d1">
       <div class="day-header" onclick="toggleDay('d1')">
         <div class="day-number">01</div>
         <div>
@@ -494,35 +528,43 @@
       </div>
       <div class="day-body">
         <div class="ex-row">
-          <div><div class="ex-name">Treadmill warm-up</div><div class="ex-note">Light jog, get heart rate up before lifting</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Jogging_Treadmill/0.jpg" alt="Treadmill" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Treadmill warm-up</div><div class="ex-note">Light jog, get heart rate up before lifting</div></div>
           <div class="ex-sets">10 min</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Flat barbell / dumbbell bench press</div><div class="ex-note">Core compound movement — chest focus, max calorie burn</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Bench_Press_-_Medium_Grip/0.jpg" alt="Bench Press" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Flat barbell / dumbbell bench press</div><div class="ex-note">Core compound movement — chest focus, max calorie burn</div></div>
           <div class="ex-sets">4 × 10</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Incline dumbbell press</div><div class="ex-note">Upper chest definition</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Press/0.jpg" alt="Incline Press" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Incline dumbbell press</div><div class="ex-note">Upper chest definition</div></div>
           <div class="ex-sets">3 × 12</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Cable crossover / pec deck fly</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Butterfly/0.jpg" alt="Pec Fly" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Cable crossover / pec deck fly</div></div>
           <div class="ex-sets">3 × 15</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Overhead dumbbell shoulder press</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shoulder_Press/0.jpg" alt="Shoulder Press" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Overhead dumbbell shoulder press</div></div>
           <div class="ex-sets">4 × 12</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Lateral raises</div><div class="ex-note">Lighter weight, full range of motion</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg" alt="Lateral Raise" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Lateral raises</div><div class="ex-note">Lighter weight, full range of motion</div></div>
           <div class="ex-sets">3 × 15</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Tricep cable pushdown + overhead ext.</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown/0.jpg" alt="Triceps" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Tricep cable pushdown + overhead ext.</div></div>
           <div class="ex-sets">3 × 15</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Ab finisher: Plank + Leg raises</div><div class="ex-note" style="color:var(--orange)">🔥 Never skip — directly targets belly fat</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Plank/0.jpg" alt="Plank" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Ab finisher: Plank + Leg raises</div><div class="ex-note" style="color:var(--orange)">🔥 Never skip — directly targets belly fat</div></div>
           <div class="ex-sets">3 × 30s / 12</div>
         </div>
       </div>
@@ -541,35 +583,43 @@
       </div>
       <div class="day-body">
         <div class="ex-row">
-          <div><div class="ex-name">Cycling warm-up</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Recumbent_Bike/0.jpg" alt="Cycling" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Cycling warm-up</div></div>
           <div class="ex-sets">10 min</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Barbell back squat</div><div class="ex-note">King of all exercises — burns maximum calories</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Squat/0.jpg" alt="Squat" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Barbell back squat</div><div class="ex-note">King of all exercises — burns maximum calories</div></div>
           <div class="ex-sets">4 × 10</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Leg press machine</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Press/0.jpg" alt="Leg Press" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Leg press machine</div></div>
           <div class="ex-sets">3 × 12</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Romanian deadlift (light–moderate weight)</div><div class="ex-note" style="color:var(--green)">Strengthens lower back — reduces your back pain</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Romanian_Deadlift/0.jpg" alt="RDL" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Romanian deadlift (light–moderate weight)</div><div class="ex-note" style="color:var(--green)">Strengthens lower back — reduces your back pain</div></div>
           <div class="ex-sets">3 × 12</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Walking lunges</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Lunges/0.jpg" alt="Lunges" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Walking lunges</div></div>
           <div class="ex-sets">3 × 12 each</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Leg curl machine</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Leg_Curls/0.jpg" alt="Leg Curl" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Leg curl machine</div></div>
           <div class="ex-sets">3 × 15</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Core circuit: Dead bug + Bird dog + Hollow hold</div><div class="ex-note">Safe for your back, activates deep core muscles</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dead_Bug/0.jpg" alt="Dead Bug" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Core circuit: Dead bug + Bird dog + Hollow hold</div><div class="ex-note">Safe for your back, activates deep core muscles</div></div>
           <div class="ex-sets">3 rounds</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Treadmill incline walk (cool-down)</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Jogging_Treadmill/0.jpg" alt="Treadmill" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Treadmill incline walk (cool-down)</div></div>
           <div class="ex-sets">10 min</div>
         </div>
       </div>
@@ -604,35 +654,43 @@
       </div>
       <div class="day-body">
         <div class="ex-row">
-          <div><div class="ex-name">Rowing machine warm-up</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rowing_Stationary/0.jpg" alt="Rower" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Rowing machine warm-up</div></div>
           <div class="ex-sets">10 min</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Lat pulldown (wide grip)</div><div class="ex-note">Builds V-shape — makes your waist look slimmer</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Lat_Pulldown/0.jpg" alt="Lat Pulldown" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Lat pulldown (wide grip)</div><div class="ex-note">Builds V-shape — makes your waist look slimmer</div></div>
           <div class="ex-sets">4 × 12</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Seated cable row</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg" alt="Cable Row" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Seated cable row</div></div>
           <div class="ex-sets">4 × 12</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Single-arm dumbbell row</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Dumbbell_Row/0.jpg" alt="DB Row" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Single-arm dumbbell row</div></div>
           <div class="ex-sets">3 × 12</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Face pulls (cable)</div><div class="ex-note" style="color:var(--green)">Fixes rounded shoulder posture from desk work</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Face_Pull/0.jpg" alt="Face Pull" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Face pulls (cable)</div><div class="ex-note" style="color:var(--green)">Fixes rounded shoulder posture from desk work</div></div>
           <div class="ex-sets">3 × 15</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Barbell / dumbbell bicep curls</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Curl/0.jpg" alt="Curls" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Barbell / dumbbell bicep curls</div></div>
           <div class="ex-sets">3 × 15</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Hammer curls</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hammer_Curls/0.jpg" alt="Hammer Curl" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Hammer curls</div></div>
           <div class="ex-sets">3 × 12</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Ab finisher: Cable crunches + Russian twists</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crunch/0.jpg" alt="Cable Crunch" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Ab finisher: Cable crunches + Russian twists</div></div>
           <div class="ex-sets">3 × 15</div>
         </div>
       </div>
@@ -667,27 +725,33 @@
       </div>
       <div class="day-body">
         <div class="ex-row">
-          <div><div class="ex-name">Goblet squat</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg" alt="Goblet Squat" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Goblet squat</div></div>
           <div class="ex-sets">4 × 12</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Step-ups (box / bench)</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Step-up_with_Knee_Raise/0.jpg" alt="Step Ups" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Step-ups (box / bench)</div></div>
           <div class="ex-sets">3 × 12 each</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Hip thrust / glute bridge</div><div class="ex-note">Also strengthens lower back</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Hip_Thrust/0.jpg" alt="Hip Thrust" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Hip thrust / glute bridge</div><div class="ex-note">Also strengthens lower back</div></div>
           <div class="ex-sets">3 × 15</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Calf raises</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Calf_Raises/0.jpg" alt="Calf Raise" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Calf raises</div></div>
           <div class="ex-sets">4 × 20</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">HIIT treadmill: 30s sprint / 60s walk</div><div class="ex-note" style="color:var(--orange)">🔥 Repeat 8–10 rounds — destroys visceral belly fat</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Jogging_Treadmill/0.jpg" alt="HIIT" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">HIIT treadmill: 30s sprint / 60s walk</div><div class="ex-note" style="color:var(--orange)">🔥 Repeat 8–10 rounds — destroys visceral belly fat</div></div>
           <div class="ex-sets">20 min</div>
         </div>
         <div class="ex-row">
-          <div><div class="ex-name">Hanging knee raises + Bicycle crunches</div></div>
+          <img class="ex-thumb" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hanging_Leg_Raise/0.jpg" alt="Leg Raise" loading="lazy" onclick="openModal(this.src)">
+          <div class="ex-info"><div class="ex-name">Hanging knee raises + Bicycle crunches</div></div>
           <div class="ex-sets">3 × 15</div>
         </div>
       </div>
@@ -965,6 +1029,12 @@
   <span style="color:var(--accent)">Consistency beats intensity. Every single time.</span>
 </footer>
 
+<!-- Image Modal -->
+<div class="img-modal-overlay" id="imgModal" onclick="closeModal()">
+  <button class="img-modal-close" onclick="closeModal()">✕</button>
+  <img id="imgModalSrc" src="" alt="Exercise preview">
+</div>
+
 <script>
   function switchTab(name, btn) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1004,6 +1074,38 @@
     ];
     document.getElementById('score-msg').textContent = msgs[done] || msgs[msgs.length - 1];
   }
+
+  // ── IMAGE MODAL ──
+  function openModal(src) {
+    const modal = document.getElementById('imgModal');
+    document.getElementById('imgModalSrc').src = src;
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    const modal = document.getElementById('imgModal');
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  // ── AUTO-OPEN TODAY'S DAY ──
+  (function() {
+    // JS getDay(): 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+    // Day card IDs: d1=Mon, d2=Tue, d3=Wed, d4=Thu, d5=Fri, d6=Sat, d7=Sun
+    const dayMap = { 1:'d1', 2:'d2', 3:'d3', 4:'d4', 5:'d5', 6:'d6', 0:'d7' };
+    const today = new Date().getDay();
+    const todayCardId = dayMap[today];
+    const card = document.getElementById(todayCardId);
+    if (card) {
+      card.classList.add('open');
+      // Highlight today's card with a subtle accent border
+      card.style.borderColor = 'rgba(232,240,74,0.3)';
+      // Scroll the card into view after a brief delay
+      setTimeout(() => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }
+  })();
 </script>
 </body>
 </html>
