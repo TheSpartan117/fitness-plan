@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personalised fitness plan for lean body transformation — workout split, diet, mobility, and daily tracking for a 26M at 75kg.">
+  <meta name="theme-color" content="#0d0f12">
   <title>My Lean Body Plan — 26M · 75kg · 173cm</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
@@ -48,23 +50,68 @@
       font-size: 15px;
       line-height: 1.6;
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLL REVEAL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(.16,1,.3,1), transform 0.6s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── REDUCED MOTION SUPPORT ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+      #headerParticles { display: none; }
     }
 
     /* ── HEADER ── */
     header {
       position: relative;
-      padding: 48px 24px 36px;
+      padding: 60px 24px 44px;
       text-align: center;
       overflow: hidden;
       border-bottom: 1px solid var(--border);
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 36px 16px 28px;
+      }
     }
 
     header::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 70% 120% at 50% -10%, rgba(232, 240, 74, 0.12) 0%, transparent 70%);
+      background:
+        radial-gradient(ellipse 70% 120% at 50% -10%, rgba(232, 240, 74, 0.14) 0%, transparent 70%),
+        radial-gradient(circle at 20% 80%, rgba(74, 158, 255, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 60%, rgba(167, 139, 250, 0.05) 0%, transparent 50%);
       pointer-events: none;
+    }
+
+    /* Particle canvas behind header content */
+    #headerParticles {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header > *:not(#headerParticles) {
+      position: relative;
+      z-index: 1;
     }
 
     .header-tag {
@@ -85,11 +132,26 @@
 
     header h1 {
       font-family: var(--font-display);
-      font-size: clamp(48px, 10vw, 88px);
-      line-height: .95;
-      letter-spacing: .02em;
+      font-size: clamp(52px, 10vw, 92px);
+      line-height: .92;
+      letter-spacing: .03em;
       color: var(--text);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      text-shadow: 0 0 80px rgba(232, 240, 74, 0.15);
+      animation: heroEntry 1s cubic-bezier(.16,1,.3,1) both;
+    }
+
+    @keyframes heroEntry {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+        filter: blur(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
     }
 
     header h1 span {
@@ -101,6 +163,7 @@
       color: var(--muted);
       letter-spacing: .04em;
       margin-bottom: 24px;
+      animation: heroEntry 1s 0.15s cubic-bezier(.16,1,.3,1) both;
     }
 
     .stat-strip {
@@ -108,15 +171,25 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
+      animation: heroEntry 1s 0.3s cubic-bezier(.16,1,.3,1) both;
     }
 
     .stat-chip {
-      background: var(--surface2);
+      background: rgba(30, 36, 45, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid var(--border2);
       border-radius: 20px;
       padding: 6px 16px;
       font-size: 13px;
       font-weight: 500;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .stat-chip:hover {
+      transform: translateY(-2px);
+      border-color: rgba(232, 240, 74, 0.3);
+      box-shadow: 0 4px 20px rgba(232, 240, 74, 0.08);
     }
 
     .stat-chip strong {
@@ -129,15 +202,19 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(13, 15, 18, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(13, 15, 18, 0.8);
+      backdrop-filter: blur(20px) saturate(1.6);
+      -webkit-backdrop-filter: blur(20px) saturate(1.6);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
       padding: 0 24px;
       display: flex;
       gap: 2px;
       overflow-x: auto;
       scrollbar-width: none;
+      transition: background 0.3s;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
     }
 
     nav::-webkit-scrollbar {
@@ -156,8 +233,23 @@
       padding: 16px 18px;
       cursor: pointer;
       position: relative;
-      transition: color .2s;
+      transition: color .25s, transform .25s;
       white-space: nowrap;
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        padding: 0 12px;
+      }
+      .tab-btn {
+        padding: 14px 14px;
+        font-size: 12px;
+        min-height: 48px;
+      }
+    }
+
+    .tab-btn:active {
+      transform: scale(0.95);
     }
 
     .tab-btn::after {
@@ -189,7 +281,13 @@
     main {
       max-width: 800px;
       margin: 0 auto;
-      padding: 32px 20px 80px;
+      padding: 32px 20px 100px;
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 20px 14px 120px;
+      }
     }
 
     .tab-panel {
@@ -231,15 +329,38 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 16px 14px;
+      padding: 18px 14px;
       text-align: center;
+      transition: transform 0.3s cubic-bezier(.16,1,.3,1), border-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .macro-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(232, 240, 74, 0.06) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .macro-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border2);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .macro-card:hover::before {
+      opacity: 1;
     }
 
     .macro-card .val {
       font-family: var(--font-display);
-      font-size: 32px;
+      font-size: clamp(26px, 6vw, 34px);
       line-height: 1;
       margin-bottom: 4px;
+      position: relative;
     }
 
     .macro-card .lbl {
@@ -247,6 +368,7 @@
       color: var(--muted);
       letter-spacing: .06em;
       text-transform: uppercase;
+      position: relative;
     }
 
     /* ── SECTION LABEL ── */
@@ -277,11 +399,12 @@
       border-radius: var(--radius);
       margin-bottom: 12px;
       overflow: hidden;
-      transition: border-color .2s;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     }
 
     .day-card:hover {
       border-color: var(--border2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 
     .day-header {
@@ -316,7 +439,7 @@
     .chevron {
       margin-left: 8px;
       color: var(--muted);
-      transition: transform .25s;
+      transition: transform .35s cubic-bezier(.16,1,.3,1);
       font-size: 12px;
       flex-shrink: 0;
     }
@@ -333,6 +456,7 @@
       text-transform: uppercase;
       padding: 3px 10px;
       border-radius: 20px;
+      transition: box-shadow 0.3s;
     }
 
     .badge-push {
@@ -340,11 +464,19 @@
       color: var(--red);
       border: 1px solid rgba(255, 87, 87, 0.25);
     }
+    .day-card:hover .badge-push,
+    .badge-push:hover {
+      box-shadow: 0 0 12px rgba(255, 87, 87, 0.25);
+    }
 
     .badge-pull {
       background: rgba(74, 158, 255, 0.15);
       color: var(--blue);
       border: 1px solid rgba(74, 158, 255, 0.25);
+    }
+    .day-card:hover .badge-pull,
+    .badge-pull:hover {
+      box-shadow: 0 0 12px rgba(74, 158, 255, 0.25);
     }
 
     .badge-lower {
@@ -352,11 +484,19 @@
       color: var(--green);
       border: 1px solid rgba(61, 220, 132, 0.25);
     }
+    .day-card:hover .badge-lower,
+    .badge-lower:hover {
+      box-shadow: 0 0 12px rgba(61, 220, 132, 0.25);
+    }
 
     .badge-hiit {
       background: rgba(255, 154, 60, 0.15);
       color: var(--orange);
       border: 1px solid rgba(255, 154, 60, 0.25);
+    }
+    .day-card:hover .badge-hiit,
+    .badge-hiit:hover {
+      box-shadow: 0 0 12px rgba(255, 154, 60, 0.25);
     }
 
     .badge-rest {
@@ -422,13 +562,17 @@
     }
 
     .mob-body {
-      display: none;
-      border-top: 1px solid var(--border);
-      padding: 0 20px 16px;
+      max-height: 0;
+      overflow: hidden;
+      border-top: 1px solid transparent;
+      padding: 0 20px;
+      transition: max-height 0.5s cubic-bezier(.16,1,.3,1), padding 0.4s, border-color 0.3s;
     }
 
     .mob-card.open .mob-body {
-      display: block;
+      max-height: 3000px;
+      padding: 0 20px 16px;
+      border-top: 1px solid var(--border);
     }
 
     .mob-card.open .chevron {
@@ -462,6 +606,51 @@
     .mob-thumb:hover {
       transform: scale(1.08);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ── GITIGNORE SECTION ── */
+    .ignore-block {
+      background: #000;
+      border: 1px solid #333;
+      border-radius: var(--radius);
+      padding: 24px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.8;
+      color: #888;
+      position: relative;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .ignore-block::before {
+      content: 'IGNORE_LIST';
+      display: block;
+      font-size: 10px;
+      color: #444;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .ignore-line {
+      display: flex;
+      gap: 12px;
+    }
+
+    .ignore-line span {
+      flex-shrink: 0;
+      color: #555;
+    }
+
+    .ignore-line strong {
+      color: var(--red);
+      font-weight: 500;
+      opacity: 0.8;
+    }
+
+    .ignore-comment {
+      color: #444 !important;
+      font-style: italic;
     }
 
     .mob-info {
@@ -535,13 +724,17 @@
     }
 
     .day-body {
-      display: none;
-      padding: 0 20px 16px;
-      border-top: 1px solid var(--border);
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 20px;
+      border-top: 1px solid transparent;
+      transition: max-height 0.5s cubic-bezier(.16,1,.3,1), padding 0.4s, border-color 0.3s;
     }
 
     .day-card.open .day-body {
-      display: block;
+      max-height: 3000px;
+      padding: 0 20px 16px;
+      border-top: 1px solid var(--border);
     }
 
     .ex-row {
@@ -565,12 +758,13 @@
       background: var(--surface2);
       border: 1px solid var(--border);
       cursor: pointer;
-      transition: transform .2s, box-shadow .2s;
+      transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .3s;
     }
 
     .ex-thumb:hover {
-      transform: scale(1.08);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      transform: scale(1.12) rotate(1deg);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+      border-color: var(--accent);
     }
 
     .ex-info {
@@ -603,13 +797,15 @@
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity .25s;
+      transition: opacity .3s;
       padding: 20px;
     }
 
@@ -621,16 +817,28 @@
     .img-modal-overlay img {
       max-width: 100%;
       max-height: 85vh;
-      border-radius: 14px;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      box-shadow: 0 12px 60px rgba(0, 0, 0, 0.7);
+      transition: transform 0.35s cubic-bezier(.16,1,.3,1);
+    }
+
+    .img-modal-overlay.show img {
+      animation: modalZoomIn 0.35s cubic-bezier(.16,1,.3,1) both;
+    }
+
+    @keyframes modalZoomIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     .img-modal-close {
       position: absolute;
       top: 16px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.12);
-      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       color: #fff;
       font-size: 24px;
       width: 40px;
@@ -640,6 +848,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: background 0.25s, transform 0.25s;
+    }
+
+    .img-modal-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
     }
 
     .rest-note {
@@ -689,11 +903,19 @@
       border-radius: var(--radius);
       padding: 16px 20px;
       margin-bottom: 10px;
-      transition: border-color .2s;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
     }
 
     .meal-card:hover {
       border-color: var(--border2);
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    @media (hover: hover) {
+      .meal-card:hover {
+        transform: translateX(4px);
+        box-shadow: -4px 0 20px rgba(232, 240, 74, 0.04);
+      }
     }
 
     .meal-time {
@@ -873,7 +1095,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background .2s, border-color .2s;
+      transition: background .3s cubic-bezier(.16,1,.3,1), border-color .3s, transform .3s, box-shadow .3s;
       font-size: 11px;
     }
 
@@ -881,6 +1103,8 @@
       background: var(--accent);
       border-color: var(--accent);
       color: #0d0f12;
+      transform: scale(1.15);
+      box-shadow: 0 0 12px rgba(232, 240, 74, 0.3);
     }
 
     .checklist li.done span {
@@ -891,10 +1115,22 @@
     /* ── FOOTER ── */
     footer {
       text-align: center;
-      padding: 32px 20px;
+      padding: 40px 20px;
       font-size: 12px;
       color: var(--muted);
       border-top: 1px solid var(--border);
+      position: relative;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
     }
 
     /* ── SCROLLBAR ── */
@@ -910,12 +1146,141 @@
       background: var(--surface3);
       border-radius: 3px;
     }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--muted);
+    }
+
+    /* ── MOBILE INLINE GRID OVERRIDES ── */
+    @media (max-width: 600px) {
+      .canteen-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .ref-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* ── FLOATING ACTION BUTTON ── */
+    .fab-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    @media (max-width: 480px) {
+      .fab-container {
+        bottom: 16px;
+        right: 16px;
+      }
+      .fab-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+      }
+    }
+
+    .fab-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s cubic-bezier(.16,1,.3,1);
+    }
+
+    .fab-container.open .fab-menu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .fab-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: 24px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.2s;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .fab-item:hover {
+      background: var(--surface3);
+      transform: translateX(-4px);
+    }
+
+    .fab-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #0d0f12;
+      box-shadow: 0 4px 20px rgba(232, 240, 74, 0.25);
+      transition: transform 0.3s cubic-bezier(.16,1,.3,1), box-shadow 0.3s;
+    }
+
+    .fab-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 30px rgba(232, 240, 74, 0.35);
+    }
+
+    .fab-container.open .fab-btn {
+      transform: rotate(45deg);
+    }
+
+    /* ── TODAY PULSE ── */
+    .day-card.today-active {
+      border-color: rgba(232, 240, 74, 0.3);
+      box-shadow: 0 0 0 1px rgba(232, 240, 74, 0.1), 0 4px 20px rgba(232, 240, 74, 0.08);
+    }
+
+    .day-card.today-active .day-number {
+      color: var(--accent);
+      animation: gentlePulse 2s infinite;
+    }
+
+    @keyframes gentlePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* ── SECTION LABEL ANIMATION ── */
+    .section-label {
+      transition: color 0.3s;
+    }
+    .section-label:hover {
+      color: var(--text);
+    }
   </style>
 </head>
 
 <body>
 
   <header>
+    <canvas id="headerParticles"></canvas>
     <div class="header-tag">🔥 Personalised Fitness Plan</div>
     <h1>GET <span>LEAN</span><br>STAY STRONG</h1>
     <p class="header-sub">Male · 26 yrs · 75 kg · 173 cm · BMI 25.1 · Desk Job</p>
@@ -927,13 +1292,14 @@
     </div>
   </header>
 
-  <nav>
-    <button class="tab-btn active" onclick="switchTab('workout', this)">💪 Workout</button>
-    <button class="tab-btn" onclick="switchTab('diet', this)">🥗 Diet Plan</button>
-    <button class="tab-btn" onclick="switchTab('desk', this)">🪑 Desk & Back</button>
-    <button class="tab-btn" onclick="switchTab('sleep', this)">😴 Sleep & Stress</button>
-    <button class="tab-btn" onclick="switchTab('mobility', this)">🧘 Mobility</button>
-    <button class="tab-btn" onclick="switchTab('tracker', this)">✅ Daily Tracker</button>
+  <nav role="tablist" aria-label="Plan sections">
+    <button class="tab-btn active" role="tab" aria-selected="true" data-tab="workout" onclick="switchTab('workout', this)">💪 Workout</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="diet" onclick="switchTab('diet', this)">🥗 Diet Plan</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="desk" onclick="switchTab('desk', this)">🪑 Desk & Back</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="sleep" onclick="switchTab('sleep', this)">😴 Sleep & Stress</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="mobility" onclick="switchTab('mobility', this)">🧘 Mobility</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="tracker" onclick="switchTab('tracker', this)">✅ Daily Tracker</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="gitignore" onclick="switchTab('gitignore', this)">🚫 .gitignore</button>
   </nav>
 
   <main>
@@ -1418,7 +1784,7 @@
         <div class="meal-time">Lunch · 1:30–2:30 PM <span class="meal-kcal">~500–600 kcal</span> <span style="background:rgba(74,158,255,0.15); color:var(--blue); font-size:10px; font-weight:600; padding:2px 8px; border-radius:20px; margin-left:6px; border:1px solid rgba(74,158,255,0.25);">🏢 OFFICE CANTEEN</span></div>
         <div class="meal-main">You can't control the menu — but you can control what you pick.</div>
         <div class="meal-alt" style="margin-top:10px;">
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+          <div class="canteen-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
             <div style="background:rgba(61,220,132,0.07); border:1px solid rgba(61,220,132,0.18); border-radius:8px; padding:10px;">
               <div style="font-size:11px; font-weight:600; color:var(--green); letter-spacing:.06em; margin-bottom:6px;">✅ PRIORITISE</div>
               <div style="font-size:12px; color:var(--muted2); line-height:1.8;">
@@ -2320,7 +2686,7 @@
       </div>
 
       <div class="section-label" style="margin-top:32px;">Quick reference</div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <div class="ref-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
         <div class="tips-card" style="padding:14px 16px;">
           <h3 style="font-size:13px; margin-bottom:8px; color:var(--muted)">WORKOUT SPLIT</h3>
           <div style="font-size:13px; line-height:2;">
@@ -2337,12 +2703,75 @@
       </div>
     </div>
 
+    <!-- ═══ GITIGNORE TAB ═══ -->
+    <div id="tab-gitignore" class="tab-panel">
+      <div class="alert alert-info" style="margin-top:8px;">
+        A developer's mindset applied to fitness. Some things are just noise — they don't belong in your commits.
+        Add these to your personal <code>.gitignore</code> to stay focused on what matters.
+      </div>
+
+      <div class="section-label">Your Journey's .gitignore</div>
+      
+      <div class="ignore-block">
+        <div class="ignore-line"><span>01</span> <strong>daily_weight_fluctuations/</strong> <span class="ignore-comment"># Water weight is not fat</span></div>
+        <div class="ignore-line"><span>02</span> <strong>perfect_gym_lighting/</strong> <span class="ignore-comment"># Real progress happens in the dark</span></div>
+        <div class="ignore-line"><span>03</span> <strong>other_peoples_progress/</strong> <span class="ignore-comment"># Comparison is the thief of gains</span></div>
+        <div class="ignore-line"><span>04</span> <strong>junk_food_guilt.log</strong> <span class="ignore-comment"># Log it, learn, and move on. No guilt.</span></div>
+        <div class="ignore-line"><span>05</span> <strong>fake_natty_influencers/</strong> <span class="ignore-comment"># Unrealistic expectations ignored</span></div>
+        <div class="ignore-line"><span>06</span> <strong>temporary_setbacks/</strong> <span class="ignore-comment"># One bad meal doesn't ruin a year</span></div>
+        <div class="ignore-line"><span>07</span> <strong>magic_pills/</strong> <span class="ignore-comment"># Supplements are 5%, work is 95%</span></div>
+        <div class="ignore-line"><span>08</span> <strong>overnight_results/</strong> <span class="ignore-comment"># Patience is a required dependency</span></div>
+        <div class="ignore-line"><span>09</span> <strong>broken_habits/*.tmp</strong> <span class="ignore-comment"># Today is a fresh build</span></div>
+        <div class="ignore-line"><span>10</span> <strong>"I'll start Monday"</strong> <span class="ignore-comment"># Start now. Commit immediately.</span></div>
+      </div>
+
+      <div class="tips-card" style="margin-top:16px;">
+        <h3 style="font-size:14px; margin-bottom:8px; color:var(--accent);">How to use this list</h3>
+        <p style="font-size:13px; color:var(--muted); line-height:1.6;">
+          In software, a <code>.gitignore</code> tells Git to ignore files that are unnecessary or sensitive.
+          In fitness, your brain often tracks "noise" that slows you down. By consciously choosing to 
+          <strong>ignore</strong> these items, you free up mental bandwidth for the habits that actually 
+          work: sleep, protein, and consistency.
+        </p>
+      </div>
+
+      <div class="section-label">Clean build checklist</div>
+      <div class="tips-card">
+        <div class="tip-item">
+          <div class="tip-dot" style="background:var(--green)"></div>
+          <div><span class="tip-strong">Focus on the trend</span>, not the daily number.</div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-dot" style="background:var(--blue)"></div>
+          <div><span class="tip-strong">Compare yourself to yesterday</span>, not a screen.</div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-dot" style="background:var(--orange)"></div>
+          <div><span class="tip-strong">Forgive the bugs</span> (bad meals) and keep shipping.</div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <footer>
     Built for personal use · Male · 26 yrs · 75 kg · 173 cm · Goal: Get lean<br>
     <span style="color:var(--accent)">Consistency beats intensity. Every single time.</span>
   </footer>
+
+  <!-- Floating Action Button -->
+  <div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+      <div class="fab-item" onclick="switchTabFromFab('workout')">💪 Workout</div>
+      <div class="fab-item" onclick="switchTabFromFab('diet')">🥗 Diet Plan</div>
+      <div class="fab-item" onclick="switchTabFromFab('desk')">🪑 Desk & Back</div>
+      <div class="fab-item" onclick="switchTabFromFab('sleep')">😴 Sleep</div>
+      <div class="fab-item" onclick="switchTabFromFab('mobility')">🧘 Mobility</div>
+      <div class="fab-item" onclick="switchTabFromFab('tracker')">✅ Tracker</div>
+      <div class="fab-item" onclick="switchTabFromFab('gitignore')">🚫 Gitignore</div>
+    </div>
+    <button class="fab-btn" onclick="toggleFab()" aria-label="Quick Navigation">+</button>
+  </div>
 
   <!-- Image Modal -->
   <div class="img-modal-overlay" id="imgModal" onclick="closeModal()">
@@ -2351,14 +2780,40 @@
   </div>
 
   <script>
+    // ── TAB SWITCHING ──
     function switchTab(name, btn) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
       document.getElementById('tab-' + name).classList.add('active');
       btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Re-trigger reveal animations in newly active panel
+      setTimeout(initScrollReveal, 100);
     }
 
+    function switchTabFromFab(name) {
+      const btn = document.querySelector('.tab-btn[data-tab="' + name + '"]');
+      if (btn) switchTab(name, btn);
+      closeFab();
+    }
+
+    // ── FAB CONTROLS ──
+    function toggleFab() {
+      document.getElementById('fabContainer').classList.toggle('open');
+    }
+    function closeFab() {
+      document.getElementById('fabContainer').classList.remove('open');
+    }
+    document.addEventListener('click', function(e) {
+      const fab = document.getElementById('fabContainer');
+      if (!fab.contains(e.target)) closeFab();
+    });
+
+    // ── CARD TOGGLES ──
     function toggleDay(id) {
       document.getElementById(id).classList.toggle('open');
     }
@@ -2367,6 +2822,7 @@
       document.getElementById(id).classList.toggle('open');
     }
 
+    // ── CHECKLIST ──
     function toggleCheck(li) {
       li.classList.toggle('done');
       updateScore();
@@ -2406,6 +2862,141 @@
       modal.classList.remove('show');
       document.body.style.overflow = '';
     }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // ── SCROLL REVEAL ──
+    function initScrollReveal() {
+      const els = document.querySelectorAll('.day-card, .mob-card, .meal-card, .tips-card, .macro-grid, .macro-split, .alert, .pain-grid, .section-label');
+      els.forEach(el => {
+        if (!el.classList.contains('reveal')) {
+          el.classList.add('reveal');
+        }
+      });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+    }
+
+    // ── ANIMATED COUNT-UP FOR MACRO CARDS ──
+    function animateCountUp() {
+      const vals = document.querySelectorAll('.macro-card .val');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.dataset.animated) {
+            entry.target.dataset.animated = 'true';
+            const text = entry.target.textContent;
+            const numMatch = text.match(/([\d,]+\.?\d*)/);
+            if (!numMatch) return;
+            const suffix = text.replace(numMatch[0], '');
+            const target = parseFloat(numMatch[0].replace(/,/g, ''));
+            const hasComma = numMatch[0].includes(',');
+            const duration = 1200;
+            const startTime = performance.now();
+            function animate(now) {
+              const elapsed = now - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 4);
+              let current = Math.round(target * eased);
+              if (hasComma) {
+                current = current.toLocaleString();
+              }
+              entry.target.textContent = current + suffix;
+              if (progress < 1) requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+          }
+        });
+      }, { threshold: 0.5 });
+      vals.forEach(v => observer.observe(v));
+    }
+
+    // ── PARTICLE SYSTEM (HEADER) ──
+    function initParticles() {
+      const canvas = document.getElementById('headerParticles');
+      if (!canvas) return;
+      // Respect reduced motion
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const ctx = canvas.getContext('2d');
+      const header = canvas.parentElement;
+      let particles = [];
+      const PARTICLE_COUNT = 40;
+      let animationId = null;
+
+      function resize() {
+        canvas.width = header.offsetWidth;
+        canvas.height = header.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.3,
+          r: Math.random() * 2 + 0.5,
+          alpha: Math.random() * 0.4 + 0.1
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(232, 240, 74, ${p.alpha})`;
+          ctx.fill();
+        });
+        // Draw faint connections
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(232, 240, 74, ${0.06 * (1 - dist / 120)})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+        animationId = requestAnimationFrame(draw);
+      }
+
+      // Only animate when header is visible
+      const headerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!animationId) draw();
+          } else {
+            if (animationId) {
+              cancelAnimationFrame(animationId);
+              animationId = null;
+            }
+          }
+        });
+      }, { threshold: 0 });
+      headerObserver.observe(header);
+    }
 
     // ── AUTO-OPEN TODAY'S DAY ──
     (function () {
@@ -2416,15 +3007,28 @@
       const todayCardId = dayMap[today];
       const card = document.getElementById(todayCardId);
       if (card) {
-        card.classList.add('open');
-        // Highlight today's card with a subtle accent border
-        card.style.borderColor = 'rgba(232,240,74,0.3)';
+        card.classList.add('open', 'today-active');
         // Scroll the card into view after a brief delay
         setTimeout(() => {
           card.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 300);
       }
     })();
+
+    // ── INITIALISE ALL SYSTEMS (single init guard) ──
+    let _initialized = false;
+    function initAll() {
+      if (_initialized) return;
+      _initialized = true;
+      initParticles();
+      initScrollReveal();
+      animateCountUp();
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAll);
+    } else {
+      initAll();
+    }
   </script>
 </body>
 
