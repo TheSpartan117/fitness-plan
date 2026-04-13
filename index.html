@@ -1,3035 +1,1027 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Personalised fitness plan for lean body transformation — workout split, diet, mobility, and daily tracking for a 26M at 75kg.">
-  <meta name="theme-color" content="#0d0f12">
-  <title>My Lean Body Plan — 26M · 75kg · 173cm</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0d0f12;
-      --surface: #161a20;
-      --surface2: #1e242d;
-      --surface3: #252d38;
-      --border: rgba(255, 255, 255, 0.07);
-      --border2: rgba(255, 255, 255, 0.12);
-      --text: #e8edf2;
-      --muted: #6b7a8d;
-      --muted2: #8a97a8;
-      --accent: #e8f04a;
-      --accent2: #c8d832;
-      --red: #ff5757;
-      --blue: #4a9eff;
-      --green: #3ddc84;
-      --orange: #ff9a3c;
-      --purple: #a78bfa;
-      --font-display: 'Bebas Neue', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
-      --font-mono: 'DM Mono', monospace;
-      --radius: 12px;
-      --radius-sm: 8px;
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 15px;
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── SCROLL REVEAL ANIMATIONS ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s cubic-bezier(.16,1,.3,1), transform 0.6s cubic-bezier(.16,1,.3,1);
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── REDUCED MOTION SUPPORT ── */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      .reveal { opacity: 1; transform: none; }
-      #headerParticles { display: none; }
-    }
-
-    /* ── HEADER ── */
-    header {
-      position: relative;
-      padding: 60px 24px 44px;
-      text-align: center;
-      overflow: hidden;
-      border-bottom: 1px solid var(--border);
-    }
-
-    @media (max-width: 480px) {
-      header {
-        padding: 36px 16px 28px;
-      }
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 120% at 50% -10%, rgba(232, 240, 74, 0.14) 0%, transparent 70%),
-        radial-gradient(circle at 20% 80%, rgba(74, 158, 255, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 80% 60%, rgba(167, 139, 250, 0.05) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    /* Particle canvas behind header content */
-    #headerParticles {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    header > *:not(#headerParticles) {
-      position: relative;
-      z-index: 1;
-    }
-
-    .header-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(232, 240, 74, 0.1);
-      border: 1px solid rgba(232, 240, 74, 0.25);
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 20px;
-      margin-bottom: 16px;
-    }
-
-    header h1 {
-      font-family: var(--font-display);
-      font-size: clamp(52px, 10vw, 92px);
-      line-height: .92;
-      letter-spacing: .03em;
-      color: var(--text);
-      margin-bottom: 8px;
-      text-shadow: 0 0 80px rgba(232, 240, 74, 0.15);
-      animation: heroEntry 1s cubic-bezier(.16,1,.3,1) both;
-    }
-
-    @keyframes heroEntry {
-      from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.96);
-        filter: blur(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-      }
-    }
-
-    header h1 span {
-      color: var(--accent);
-    }
-
-    .header-sub {
-      font-size: 14px;
-      color: var(--muted);
-      letter-spacing: .04em;
-      margin-bottom: 24px;
-      animation: heroEntry 1s 0.15s cubic-bezier(.16,1,.3,1) both;
-    }
-
-    .stat-strip {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      animation: heroEntry 1s 0.3s cubic-bezier(.16,1,.3,1) both;
-    }
-
-    .stat-chip {
-      background: rgba(30, 36, 45, 0.7);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid var(--border2);
-      border-radius: 20px;
-      padding: 6px 16px;
-      font-size: 13px;
-      font-weight: 500;
-      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-    }
-
-    .stat-chip:hover {
-      transform: translateY(-2px);
-      border-color: rgba(232, 240, 74, 0.3);
-      box-shadow: 0 4px 20px rgba(232, 240, 74, 0.08);
-    }
-
-    .stat-chip strong {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* ── NAV TABS ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(13, 15, 18, 0.8);
-      backdrop-filter: blur(20px) saturate(1.6);
-      -webkit-backdrop-filter: blur(20px) saturate(1.6);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-      padding: 0 24px;
-      display: flex;
-      gap: 2px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      transition: background 0.3s;
-      -webkit-overflow-scrolling: touch;
-      touch-action: pan-x;
-    }
-
-    nav::-webkit-scrollbar {
-      display: none;
-    }
-
-    .tab-btn {
-      flex-shrink: 0;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: .03em;
-      padding: 16px 18px;
-      cursor: pointer;
-      position: relative;
-      transition: color .25s, transform .25s;
-      white-space: nowrap;
-    }
-
-    @media (max-width: 480px) {
-      nav {
-        padding: 0 12px;
-      }
-      .tab-btn {
-        padding: 14px 14px;
-        font-size: 12px;
-        min-height: 48px;
-      }
-    }
-
-    .tab-btn:active {
-      transform: scale(0.95);
-    }
-
-    .tab-btn::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 16px;
-      right: 16px;
-      height: 2px;
-      background: var(--accent);
-      border-radius: 2px 2px 0 0;
-      transform: scaleX(0);
-      transition: transform .25s cubic-bezier(.4, 0, .2, 1);
-    }
-
-    .tab-btn.active {
-      color: var(--accent);
-    }
-
-    .tab-btn.active::after {
-      transform: scaleX(1);
-    }
-
-    .tab-btn:hover:not(.active) {
-      color: var(--text);
-    }
-
-    /* ── MAIN CONTENT ── */
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 32px 20px 100px;
-    }
-
-    @media (max-width: 480px) {
-      main {
-        padding: 20px 14px 120px;
-      }
-    }
-
-    .tab-panel {
-      display: none;
-      animation: fadeUp .3s ease;
-    }
-
-    .tab-panel.active {
-      display: block;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ── MACRO CARDS ── */
-    .macro-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-
-    @media (max-width: 500px) {
-      .macro-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .macro-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 14px;
-      text-align: center;
-      transition: transform 0.3s cubic-bezier(.16,1,.3,1), border-color 0.3s, box-shadow 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .macro-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(232, 240, 74, 0.06) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .macro-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--border2);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-    }
-
-    .macro-card:hover::before {
-      opacity: 1;
-    }
-
-    .macro-card .val {
-      font-family: var(--font-display);
-      font-size: clamp(26px, 6vw, 34px);
-      line-height: 1;
-      margin-bottom: 4px;
-      position: relative;
-    }
-
-    .macro-card .lbl {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      position: relative;
-    }
-
-    /* ── SECTION LABEL ── */
-    .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 14px;
-      margin-top: 32px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ── DAY CARD ── */
-    .day-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      margin-bottom: 12px;
-      overflow: hidden;
-      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    }
-
-    .day-card:hover {
-      border-color: var(--border2);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .day-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 20px;
-      cursor: pointer;
-      user-select: none;
-      flex-wrap: wrap;
-    }
-
-    .day-number {
-      font-family: var(--font-display);
-      font-size: 28px;
-      line-height: 1;
-      color: var(--muted);
-      min-width: 32px;
-    }
-
-    .day-name {
-      font-weight: 600;
-      font-size: 16px;
-    }
-
-    .day-focus {
-      font-size: 12px;
-      color: var(--muted2);
-      margin-left: auto;
-    }
-
-    .chevron {
-      margin-left: 8px;
-      color: var(--muted);
-      transition: transform .35s cubic-bezier(.16,1,.3,1);
-      font-size: 12px;
-      flex-shrink: 0;
-    }
-
-    .day-card.open .chevron {
-      transform: rotate(180deg);
-    }
-
-    .badge {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 20px;
-      transition: box-shadow 0.3s;
-    }
-
-    .badge-push {
-      background: rgba(255, 87, 87, 0.15);
-      color: var(--red);
-      border: 1px solid rgba(255, 87, 87, 0.25);
-    }
-    .day-card:hover .badge-push,
-    .badge-push:hover {
-      box-shadow: 0 0 12px rgba(255, 87, 87, 0.25);
-    }
-
-    .badge-pull {
-      background: rgba(74, 158, 255, 0.15);
-      color: var(--blue);
-      border: 1px solid rgba(74, 158, 255, 0.25);
-    }
-    .day-card:hover .badge-pull,
-    .badge-pull:hover {
-      box-shadow: 0 0 12px rgba(74, 158, 255, 0.25);
-    }
-
-    .badge-lower {
-      background: rgba(61, 220, 132, 0.15);
-      color: var(--green);
-      border: 1px solid rgba(61, 220, 132, 0.25);
-    }
-    .day-card:hover .badge-lower,
-    .badge-lower:hover {
-      box-shadow: 0 0 12px rgba(61, 220, 132, 0.25);
-    }
-
-    .badge-hiit {
-      background: rgba(255, 154, 60, 0.15);
-      color: var(--orange);
-      border: 1px solid rgba(255, 154, 60, 0.25);
-    }
-    .day-card:hover .badge-hiit,
-    .badge-hiit:hover {
-      box-shadow: 0 0 12px rgba(255, 154, 60, 0.25);
-    }
-
-    .badge-rest {
-      background: rgba(107, 122, 141, 0.15);
-      color: var(--muted2);
-      border: 1px solid var(--border);
-    }
-
-    .badge-mobility {
-      background: rgba(167, 139, 250, 0.15);
-      color: var(--purple);
-      border: 1px solid rgba(167, 139, 250, 0.25);
-    }
-
-    /* ── MOBILITY CARDS ── */
-    .mob-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      margin-bottom: 12px;
-      overflow: hidden;
-      transition: border-color .2s;
-    }
-
-    .mob-card:hover {
-      border-color: var(--border2);
-    }
-
-    .mob-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 20px;
-      cursor: pointer;
-      user-select: none;
-      flex-wrap: wrap;
-    }
-
-    .mob-icon {
-      font-size: 22px;
-      width: 36px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .mob-title {
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .mob-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .mob-duration {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--purple);
-      margin-left: auto;
-      flex-shrink: 0;
-    }
-
-    .mob-body {
-      max-height: 0;
-      overflow: hidden;
-      border-top: 1px solid transparent;
-      padding: 0 20px;
-      transition: max-height 0.5s cubic-bezier(.16,1,.3,1), padding 0.4s, border-color 0.3s;
-    }
-
-    .mob-card.open .mob-body {
-      max-height: 3000px;
-      padding: 0 20px 16px;
-      border-top: 1px solid var(--border);
-    }
-
-    .mob-card.open .chevron {
-      transform: rotate(180deg);
-    }
-
-    .mob-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .mob-row:last-child {
-      border-bottom: none;
-    }
-
-    .mob-thumb {
-      width: 52px;
-      height: 52px;
-      border-radius: 10px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: transform .2s, box-shadow .2s;
-    }
-
-    .mob-thumb:hover {
-      transform: scale(1.08);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    }
-
-    /* ── GITIGNORE SECTION ── */
-    .ignore-block {
-      background: #000;
-      border: 1px solid #333;
-      border-radius: var(--radius);
-      padding: 24px;
-      font-family: var(--font-mono);
-      font-size: 13px;
-      line-height: 1.8;
-      color: #888;
-      position: relative;
-      overflow: hidden;
-      margin-top: 8px;
-    }
-
-    .ignore-block::before {
-      content: 'IGNORE_LIST';
-      display: block;
-      font-size: 10px;
-      color: #444;
-      margin-bottom: 20px;
-      letter-spacing: 2px;
-    }
-
-    .ignore-line {
-      display: flex;
-      gap: 12px;
-    }
-
-    .ignore-line span {
-      flex-shrink: 0;
-      color: #555;
-    }
-
-    .ignore-line strong {
-      color: var(--red);
-      font-weight: 500;
-      opacity: 0.8;
-    }
-
-    .ignore-comment {
-      color: #444 !important;
-      font-style: italic;
-    }
-
-    .mob-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .mob-name {
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .mob-note {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-      line-height: 1.5;
-    }
-
-    .mob-hold {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--purple);
-      white-space: nowrap;
-      padding-top: 2px;
-      flex-shrink: 0;
-    }
-
-    .pain-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    @media (max-width: 480px) {
-      .pain-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .pain-card {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 14px;
-    }
-
-    .pain-card-title {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .pain-card ul {
-      list-style: none;
-    }
-
-    .pain-card ul li {
-      font-size: 12px;
-      color: var(--muted2);
-      padding: 4px 0;
-      border-bottom: 1px solid var(--border);
-      line-height: 1.5;
-    }
-
-    .pain-card ul li:last-child {
-      border-bottom: none;
-    }
-
-    .day-body {
-      max-height: 0;
-      overflow: hidden;
-      padding: 0 20px;
-      border-top: 1px solid transparent;
-      transition: max-height 0.5s cubic-bezier(.16,1,.3,1), padding 0.4s, border-color 0.3s;
-    }
-
-    .day-card.open .day-body {
-      max-height: 3000px;
-      padding: 0 20px 16px;
-      border-top: 1px solid var(--border);
-    }
-
-    .ex-row {
-      display: flex;
-      align-items: flex-start;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      gap: 10px;
-    }
-
-    .ex-row:last-child {
-      border-bottom: none;
-    }
-
-    .ex-thumb {
-      width: 52px;
-      height: 52px;
-      border-radius: 10px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .3s;
-    }
-
-    .ex-thumb:hover {
-      transform: scale(1.12) rotate(1deg);
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
-      border-color: var(--accent);
-    }
-
-    .ex-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .ex-name {
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .ex-note {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .ex-sets {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent);
-      white-space: nowrap;
-      padding-top: 2px;
-      flex-shrink: 0;
-    }
-
-    /* ── IMAGE MODAL ── */
-    .img-modal-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .3s;
-      padding: 20px;
-    }
-
-    .img-modal-overlay.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .img-modal-overlay img {
-      max-width: 100%;
-      max-height: 85vh;
-      border-radius: 16px;
-      box-shadow: 0 12px 60px rgba(0, 0, 0, 0.7);
-      transition: transform 0.35s cubic-bezier(.16,1,.3,1);
-    }
-
-    .img-modal-overlay.show img {
-      animation: modalZoomIn 0.35s cubic-bezier(.16,1,.3,1) both;
-    }
-
-    @keyframes modalZoomIn {
-      from { transform: scale(0.85); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .img-modal-close {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #fff;
-      font-size: 24px;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.25s, transform 0.25s;
-    }
-
-    .img-modal-close:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: scale(1.1);
-    }
-
-    .rest-note {
-      padding: 12px 0;
-      font-size: 13px;
-      color: var(--muted2);
-    }
-
-    /* ── ALERT BOXES ── */
-    .alert {
-      border-radius: var(--radius-sm);
-      padding: 12px 16px;
-      font-size: 13px;
-      line-height: 1.6;
-      margin-bottom: 16px;
-      border-left: 3px solid;
-    }
-
-    .alert-warn {
-      background: rgba(255, 154, 60, 0.08);
-      border-color: var(--orange);
-      color: #ffc78a;
-    }
-
-    .alert-info {
-      background: rgba(74, 158, 255, 0.08);
-      border-color: var(--blue);
-      color: #a0c8ff;
-    }
-
-    .alert-danger {
-      background: rgba(255, 87, 87, 0.08);
-      border-color: var(--red);
-      color: #ffaaaa;
-    }
-
-    .alert-success {
-      background: rgba(61, 220, 132, 0.08);
-      border-color: var(--green);
-      color: #90e8b8;
-    }
-
-    /* ── MEAL CARDS ── */
-    .meal-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 20px;
-      margin-bottom: 10px;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-
-    .meal-card:hover {
-      border-color: var(--border2);
-      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
-    }
-
-    @media (hover: hover) {
-      .meal-card:hover {
-        transform: translateX(4px);
-        box-shadow: -4px 0 20px rgba(232, 240, 74, 0.04);
-      }
-    }
-
-    .meal-time {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .meal-kcal {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--accent);
-      margin-left: 8px;
-    }
-
-    .meal-main {
-      font-size: 15px;
-      font-weight: 500;
-      line-height: 1.5;
-    }
-
-    .meal-alt {
-      font-size: 12px;
-      color: var(--muted2);
-      margin-top: 5px;
-      line-height: 1.6;
-    }
-
-    /* ── TIPS LIST ── */
-    .tips-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 12px;
-    }
-
-    .tips-card h3 {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 14px;
-      color: var(--text);
-    }
-
-    .tip-item {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .tip-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .tip-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      margin-top: 6px;
-      flex-shrink: 0;
-    }
-
-    .tip-strong {
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    /* ── TIMELINE ── */
-    .timeline {
-      margin-top: 8px;
-    }
-
-    .tl-item {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .tl-item:last-child {
-      border-bottom: none;
-    }
-
-    .tl-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--accent);
-      white-space: nowrap;
-      min-width: 80px;
-      padding-top: 2px;
-    }
-
-    .tl-desc {
-      font-size: 13px;
-      color: var(--muted2);
-    }
-
-    .tl-desc strong {
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    /* ── MACROS PIE DISPLAY ── */
-    .macro-split {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 20px;
-      flex-wrap: wrap;
-    }
-
-    .macro-bar-wrap {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .macro-bar-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      margin-bottom: 5px;
-    }
-
-    .macro-bar-track {
-      height: 6px;
-      background: var(--surface3);
-      border-radius: 3px;
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-
-    .macro-bar-fill {
-      height: 100%;
-      border-radius: 3px;
-    }
-
-    /* ── PROGRESS CHECKLIST ── */
-    .checklist {
-      list-style: none;
-    }
-
-    .checklist li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 9px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-      line-height: 1.55;
-      cursor: pointer;
-    }
-
-    .checklist li:last-child {
-      border-bottom: none;
-    }
-
-    .check-box {
-      width: 18px;
-      height: 18px;
-      border: 1.5px solid var(--border2);
-      border-radius: 4px;
-      flex-shrink: 0;
-      margin-top: 1px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background .3s cubic-bezier(.16,1,.3,1), border-color .3s, transform .3s, box-shadow .3s;
-      font-size: 11px;
-    }
-
-    .checklist li.done .check-box {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #0d0f12;
-      transform: scale(1.15);
-      box-shadow: 0 0 12px rgba(232, 240, 74, 0.3);
-    }
-
-    .checklist li.done span {
-      color: var(--muted);
-      text-decoration: line-through;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      font-size: 12px;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      position: relative;
-    }
-
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    }
-
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--surface3);
-      border-radius: 3px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--muted);
-    }
-
-    /* ── MOBILE INLINE GRID OVERRIDES ── */
-    @media (max-width: 600px) {
-      .canteen-grid {
-        grid-template-columns: 1fr !important;
-      }
-      .ref-grid {
-        grid-template-columns: 1fr !important;
-      }
-    }
-
-    /* ── FLOATING ACTION BUTTON ── */
-    .fab-container {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 200;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-    }
-
-    @media (max-width: 480px) {
-      .fab-container {
-        bottom: 16px;
-        right: 16px;
-      }
-      .fab-btn {
-        width: 48px;
-        height: 48px;
-        font-size: 20px;
-      }
-    }
-
-    .fab-menu {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-      opacity: 0;
-      transform: translateY(10px);
-      pointer-events: none;
-      transition: opacity 0.3s, transform 0.3s cubic-bezier(.16,1,.3,1);
-    }
-
-    .fab-container.open .fab-menu {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .fab-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--surface2);
-      border: 1px solid var(--border2);
-      border-radius: 24px;
-      padding: 8px 14px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text);
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: background 0.2s, transform 0.2s;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    .fab-item:hover {
-      background: var(--surface3);
-      transform: translateX(-4px);
-    }
-
-    .fab-btn {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      color: #0d0f12;
-      box-shadow: 0 4px 20px rgba(232, 240, 74, 0.25);
-      transition: transform 0.3s cubic-bezier(.16,1,.3,1), box-shadow 0.3s;
-    }
-
-    .fab-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 6px 30px rgba(232, 240, 74, 0.35);
-    }
-
-    .fab-container.open .fab-btn {
-      transform: rotate(45deg);
-    }
-
-    /* ── TODAY PULSE ── */
-    .day-card.today-active {
-      border-color: rgba(232, 240, 74, 0.3);
-      box-shadow: 0 0 0 1px rgba(232, 240, 74, 0.1), 0 4px 20px rgba(232, 240, 74, 0.08);
-    }
-
-    .day-card.today-active .day-number {
-      color: var(--accent);
-      animation: gentlePulse 2s infinite;
-    }
-
-    @keyframes gentlePulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
-    }
-
-    /* ── SECTION LABEL ANIMATION ── */
-    .section-label {
-      transition: color 0.3s;
-    }
-    .section-label:hover {
-      color: var(--text);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Fitness Dashboard</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, max-image-preview:none">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex, max-image-preview:none">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --surface: #161a20;
+    --surface2: #1e242d;
+    --surface3: #252d38;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8edf2;
+    --muted: #6b7a8d;
+    --muted2: #8a97a8;
+    --accent: #e8f04a;
+    --accent2: #c8d832;
+    --red: #ff5757;
+    --blue: #4a9eff;
+    --green: #3ddc84;
+    --orange: #ff9a3c;
+    --purple: #a78bfa;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    padding: 48px 24px 36px;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 120% at 50% -10%, rgba(232,240,74,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(232,240,74,0.1);
+    border: 1px solid rgba(232,240,74,0.25);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 10vw, 88px);
+    line-height: .95;
+    letter-spacing: .02em;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  header h1 span { color: var(--accent); }
+  .header-sub {
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: .04em;
+    margin-bottom: 24px;
+  }
+  .stat-strip {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .stat-chip {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .stat-chip strong { color: var(--accent); font-weight: 600; }
+  .privacy-note {
+    max-width: 760px;
+    margin: 16px auto 0;
+    background: rgba(22,26,32,0.92);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 13px;
+    color: var(--muted2);
+  }
+  .privacy-note strong { color: var(--text); }
+
+  /* ── NAV TABS ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,15,18,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .03em;
+    padding: 16px 18px;
+    cursor: pointer;
+    position: relative;
+    transition: color .2s;
+    white-space: nowrap;
+  }
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 16px; right: 16px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px 2px 0 0;
+    transform: scaleX(0);
+    transition: transform .25s cubic-bezier(.4,0,.2,1);
+  }
+  .tab-btn.active { color: var(--accent); }
+  .tab-btn.active::after { transform: scaleX(1); }
+  .tab-btn:hover:not(.active) { color: var(--text); }
+
+  /* ── MAIN CONTENT ── */
+  main { max-width: 800px; margin: 0 auto; padding: 32px 20px 80px; }
+  .tab-panel { display: none; animation: fadeUp .3s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── MACRO CARDS ── */
+  .macro-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  @media (max-width: 500px) { .macro-grid { grid-template-columns: repeat(2,1fr); } }
+  .macro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .macro-card .val {
+    font-family: var(--font-display);
+    font-size: 32px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .macro-card .lbl { font-size: 11px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+  /* ── DAY CARD ── */
+  .day-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .day-card:hover { border-color: var(--border2); }
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    flex-wrap: wrap;
+  }
+  .day-number {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1;
+    color: var(--muted);
+    min-width: 32px;
+  }
+  .day-name { font-weight: 600; font-size: 16px; }
+  .day-focus { font-size: 12px; color: var(--muted2); margin-left: auto; }
+  .chevron {
+    margin-left: 8px;
+    color: var(--muted);
+    transition: transform .25s;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .day-card.open .chevron { transform: rotate(180deg); }
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .badge-push { background: rgba(255,87,87,0.15); color: var(--red); border: 1px solid rgba(255,87,87,0.25); }
+  .badge-pull { background: rgba(74,158,255,0.15); color: var(--blue); border: 1px solid rgba(74,158,255,0.25); }
+  .badge-lower { background: rgba(61,220,132,0.15); color: var(--green); border: 1px solid rgba(61,220,132,0.25); }
+  .badge-hiit { background: rgba(255,154,60,0.15); color: var(--orange); border: 1px solid rgba(255,154,60,0.25); }
+  .badge-rest { background: rgba(107,122,141,0.15); color: var(--muted2); border: 1px solid var(--border); }
+  .day-body {
+    display: none;
+    padding: 0 20px 16px;
+    border-top: 1px solid var(--border);
+  }
+  .day-card.open .day-body { display: block; }
+  .ex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .ex-row:last-child { border-bottom: none; }
+  .ex-name { font-size: 14px; font-weight: 500; }
+  .ex-note { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .ex-sets {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    white-space: nowrap;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .rest-note {
+    padding: 12px 0;
+    font-size: 13px;
+    color: var(--muted2);
+  }
+
+  /* ── ALERT BOXES ── */
+  .alert {
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    border-left: 3px solid;
+  }
+  .alert-warn { background: rgba(255,154,60,0.08); border-color: var(--orange); color: #ffc78a; }
+  .alert-info { background: rgba(74,158,255,0.08); border-color: var(--blue); color: #a0c8ff; }
+  .alert-danger { background: rgba(255,87,87,0.08); border-color: var(--red); color: #ffaaaa; }
+  .alert-success { background: rgba(61,220,132,0.08); border-color: var(--green); color: #90e8b8; }
+
+  /* ── MEAL CARDS ── */
+  .meal-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    transition: border-color .2s;
+  }
+  .meal-card:hover { border-color: var(--border2); }
+  .meal-time {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .meal-kcal {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    margin-left: 8px;
+  }
+  .meal-main { font-size: 15px; font-weight: 500; line-height: 1.5; }
+  .meal-alt { font-size: 12px; color: var(--muted2); margin-top: 5px; line-height: 1.6; }
+
+  /* ── TIPS LIST ── */
+  .tips-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .tips-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+  .tip-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .tip-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .tip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+  .tip-strong { font-weight: 600; color: var(--text); }
+
+  /* ── TIMELINE ── */
+  .timeline { margin-top: 8px; }
+  .tl-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    white-space: nowrap;
+    min-width: 80px;
+    padding-top: 2px;
+  }
+  .tl-desc { font-size: 13px; color: var(--muted2); }
+  .tl-desc strong { font-weight: 600; color: var(--text); }
+
+  /* ── MACROS PIE DISPLAY ── */
+  .macro-split {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    flex-wrap: wrap;
+  }
+  .macro-bar-wrap { flex: 1; min-width: 200px; }
+  .macro-bar-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; }
+  .macro-bar-track { height: 6px; background: var(--surface3); border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+  .macro-bar-fill { height: 100%; border-radius: 3px; }
+
+  /* ── PROGRESS CHECKLIST ── */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.55;
+    cursor: pointer;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border2);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s, border-color .2s;
+    font-size: 11px;
+  }
+  .checklist li.done .check-box {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0d0f12;
+  }
+  .checklist li.done span { color: var(--muted); text-decoration: line-through; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
+</style>
 </head>
-
 <body>
 
-  <header>
-    <canvas id="headerParticles"></canvas>
-    <div class="header-tag">🔥 Personalised Fitness Plan</div>
-    <h1>GET <span>LEAN</span><br>STAY STRONG</h1>
-    <p class="header-sub">Male · 26 yrs · 75 kg · 173 cm · BMI 25.1 · Desk Job</p>
-    <div class="stat-strip">
-      <div class="stat-chip">🏋️ <strong>4 days</strong>/week · Gym</div>
-      <div class="stat-chip">🍗 Non-vegetarian</div>
-      <div class="stat-chip">⏱ <strong>60+ min</strong>/session</div>
-      <div class="stat-chip">🎯 Goal: <strong>Lose belly fat</strong></div>
+<header>
+  <div class="header-tag">Private Reference</div>
+  <h1>GET <span>LEAN</span><br>STAY STRONG</h1>
+  <p class="header-sub">Private workout and nutrition reference for one person.</p>
+  <div class="stat-strip">
+    <div class="stat-chip">🏋️ <strong>4 days</strong>/week · Gym</div>
+    <div class="stat-chip">🍗 Non-vegetarian</div>
+    <div class="stat-chip">⏱ <strong>60+ min</strong>/session</div>
+    <div class="stat-chip">🎯 Goal: <strong>Leaner routine</strong></div>
+  </div>
+  <div class="privacy-note"><strong>Personal-use note:</strong> this page is a private reminder board, not medical or coaching advice. Targets and food choices here are individualized and should not be copied blindly.</div>
+</header>
+
+<nav>
+  <button class="tab-btn active" onclick="switchTab('workout', this)">💪 Workout</button>
+  <button class="tab-btn" onclick="switchTab('diet', this)">🥗 Diet Plan</button>
+  <button class="tab-btn" onclick="switchTab('desk', this)">🪑 Desk & Back</button>
+  <button class="tab-btn" onclick="switchTab('sleep', this)">😴 Sleep & Stress</button>
+  <button class="tab-btn" onclick="switchTab('tracker', this)">✅ Daily Tracker</button>
+</nav>
+
+<main>
+
+  <!-- ═══ WORKOUT TAB ═══ -->
+  <div id="tab-workout" class="tab-panel active">
+    <div class="macro-grid" style="margin-top:8px;">
+      <div class="macro-card">
+        <div class="val" style="color:var(--accent)">1,850</div>
+        <div class="lbl">kcal / day</div>
+      </div>
+      <div class="macro-card">
+        <div class="val" style="color:var(--red)">130g</div>
+        <div class="lbl">Protein</div>
+      </div>
+      <div class="macro-card">
+        <div class="val" style="color:var(--blue)">3.5L</div>
+        <div class="lbl">Water</div>
+      </div>
+      <div class="macro-card">
+        <div class="val" style="color:var(--green)">~500</div>
+        <div class="lbl">kcal deficit</div>
+      </div>
     </div>
-  </header>
 
-  <nav role="tablist" aria-label="Plan sections">
-    <button class="tab-btn active" role="tab" aria-selected="true" data-tab="workout" onclick="switchTab('workout', this)">💪 Workout</button>
-    <button class="tab-btn" role="tab" aria-selected="false" data-tab="diet" onclick="switchTab('diet', this)">🥗 Diet Plan</button>
-    <button class="tab-btn" role="tab" aria-selected="false" data-tab="desk" onclick="switchTab('desk', this)">🪑 Desk & Back</button>
-    <button class="tab-btn" role="tab" aria-selected="false" data-tab="sleep" onclick="switchTab('sleep', this)">😴 Sleep & Stress</button>
-    <button class="tab-btn" role="tab" aria-selected="false" data-tab="mobility" onclick="switchTab('mobility', this)">🧘 Mobility</button>
-    <button class="tab-btn" role="tab" aria-selected="false" data-tab="tracker" onclick="switchTab('tracker', this)">✅ Daily Tracker</button>
-    <button class="tab-btn" role="tab" aria-selected="false" data-tab="gitignore" onclick="switchTab('gitignore', this)">🚫 .gitignore</button>
-  </nav>
+    <div class="alert alert-info">Upper / Lower split — 4 days/week. Each session is planned for roughly 65–75 minutes including warm-up. Compound lifts help cover more muscle groups and keep the routine efficient.</div>
 
-  <main>
+    <div class="section-label">Weekly schedule</div>
 
-    <!-- ═══ WORKOUT TAB ═══ -->
-    <div id="tab-workout" class="tab-panel active">
-      <div class="macro-grid" style="margin-top:8px;">
-        <div class="macro-card">
-          <div class="val" style="color:var(--accent)">1,850</div>
-          <div class="lbl">kcal / day</div>
+    <!-- Day 1 -->
+    <div class="day-card open" id="d1">
+      <div class="day-header" onclick="toggleDay('d1')">
+        <div class="day-number">01</div>
+        <div>
+          <div class="day-name">Monday <span class="badge badge-push">Upper Push</span></div>
+          <div class="ex-note">Chest · Shoulders · Triceps · Core</div>
         </div>
-        <div class="macro-card">
-          <div class="val" style="color:var(--red)">130g</div>
-          <div class="lbl">Protein</div>
-        </div>
-        <div class="macro-card">
-          <div class="val" style="color:var(--blue)">3.5L</div>
-          <div class="lbl">Water</div>
-        </div>
-        <div class="macro-card">
-          <div class="val" style="color:var(--green)">~500</div>
-          <div class="lbl">kcal deficit</div>
-        </div>
+        <div class="day-focus">~70 min</div>
+        <span class="chevron">▼</span>
       </div>
-
-      <div class="alert alert-info">Upper / Lower split — 4 days/week. Each session ~65–75 min including warm-up. Big
-        compound lifts naturally boost testosterone, burning belly fat faster.</div>
-
-      <div class="section-label">Weekly schedule</div>
-
-      <!-- Day 1 -->
-      <div class="day-card" id="d1">
-        <div class="day-header" onclick="toggleDay('d1')">
-          <div class="day-number">01</div>
-          <div>
-            <div class="day-name">Monday <span class="badge badge-push">Upper Push</span></div>
-            <div class="ex-note">Chest · Shoulders · Triceps · Core</div>
-          </div>
-          <div class="day-focus">~70 min</div>
-          <span class="chevron">▼</span>
+      <div class="day-body">
+        <div class="ex-row">
+          <div><div class="ex-name">Treadmill warm-up</div><div class="ex-note">Light jog, get heart rate up before lifting</div></div>
+          <div class="ex-sets">10 min</div>
         </div>
-        <div class="day-body">
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Jogging_Treadmill/0.jpg"
-              alt="Treadmill" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Treadmill warm-up</div>
-              <div class="ex-note">Light jog, get heart rate up before lifting</div>
-            </div>
-            <div class="ex-sets">10 min</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Bench_Press_-_Medium_Grip/0.jpg"
-              alt="Bench Press" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Flat barbell / dumbbell bench press</div>
-              <div class="ex-note">Core compound movement — chest focus, max calorie burn</div>
-            </div>
-            <div class="ex-sets">4 × 10</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Press/0.jpg"
-              alt="Incline Press" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Incline dumbbell press</div>
-              <div class="ex-note">Upper chest definition</div>
-            </div>
-            <div class="ex-sets">3 × 12</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Butterfly/0.jpg"
-              alt="Pec Fly" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Cable crossover / pec deck fly</div>
-            </div>
-            <div class="ex-sets">3 × 15</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shoulder_Press/0.jpg"
-              alt="Shoulder Press" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Overhead dumbbell shoulder press</div>
-            </div>
-            <div class="ex-sets">4 × 12</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg"
-              alt="Lateral Raise" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Lateral raises</div>
-              <div class="ex-note">Lighter weight, full range of motion</div>
-            </div>
-            <div class="ex-sets">3 × 15</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown/0.jpg"
-              alt="Triceps" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Tricep cable pushdown + overhead ext.</div>
-            </div>
-            <div class="ex-sets">3 × 15</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Plank/0.jpg" alt="Plank"
-              loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Ab finisher: Plank + Leg raises</div>
-              <div class="ex-note" style="color:var(--orange)">🔥 Never skip — directly targets belly fat</div>
-            </div>
-            <div class="ex-sets">3 × 30s / 12</div>
-          </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Flat barbell / dumbbell bench press</div><div class="ex-note">Core compound movement — chest focus, max calorie burn</div></div>
+          <div class="ex-sets">4 × 10</div>
         </div>
-      </div>
-
-      <!-- Day 2 -->
-      <div class="day-card" id="d2">
-        <div class="day-header" onclick="toggleDay('d2')">
-          <div class="day-number">02</div>
-          <div>
-            <div class="day-name">Tuesday <span class="badge badge-lower">Lower Body</span></div>
-            <div class="ex-note">Quads · Glutes · Hamstrings · Core</div>
-          </div>
-          <div class="day-focus">~70 min</div>
-          <span class="chevron">▼</span>
+        <div class="ex-row">
+          <div><div class="ex-name">Incline dumbbell press</div><div class="ex-note">Upper chest definition</div></div>
+          <div class="ex-sets">3 × 12</div>
         </div>
-        <div class="day-body">
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Recumbent_Bike/0.jpg"
-              alt="Cycling" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Cycling warm-up</div>
-            </div>
-            <div class="ex-sets">10 min</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Squat/0.jpg"
-              alt="Squat" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Barbell back squat</div>
-              <div class="ex-note">King of all exercises — burns maximum calories</div>
-            </div>
-            <div class="ex-sets">4 × 10</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Press/0.jpg"
-              alt="Leg Press" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Leg press machine</div>
-            </div>
-            <div class="ex-sets">3 × 12</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Romanian_Deadlift/0.jpg"
-              alt="RDL" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Romanian deadlift (light–moderate weight)</div>
-              <div class="ex-note" style="color:var(--green)">Strengthens lower back — reduces your back pain</div>
-            </div>
-            <div class="ex-sets">3 × 12</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Lunges/0.jpg"
-              alt="Lunges" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Walking lunges</div>
-            </div>
-            <div class="ex-sets">3 × 12 each</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Leg_Curls/0.jpg"
-              alt="Leg Curl" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Leg curl machine</div>
-            </div>
-            <div class="ex-sets">3 × 15</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dead_Bug/0.jpg"
-              alt="Dead Bug" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Core circuit: Dead bug + Bird dog + Hollow hold</div>
-              <div class="ex-note">Safe for your back, activates deep core muscles</div>
-            </div>
-            <div class="ex-sets">3 rounds</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Jogging_Treadmill/0.jpg"
-              alt="Treadmill" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Treadmill incline walk (cool-down)</div>
-            </div>
-            <div class="ex-sets">10 min</div>
-          </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Cable crossover / pec deck fly</div></div>
+          <div class="ex-sets">3 × 15</div>
         </div>
-      </div>
-
-      <!-- Wednesday rest -->
-      <div class="day-card" id="d3">
-        <div class="day-header" onclick="toggleDay('d3')">
-          <div class="day-number">—</div>
-          <div>
-            <div class="day-name">Wednesday <span class="badge badge-rest">Active Rest</span></div>
-            <div class="ex-note">Recovery day</div>
-          </div>
-          <div class="day-focus">Light</div>
-          <span class="chevron">▼</span>
+        <div class="ex-row">
+          <div><div class="ex-name">Overhead dumbbell shoulder press</div></div>
+          <div class="ex-sets">4 × 12</div>
         </div>
-        <div class="day-body">
-          <p class="rest-note">20 min walk outside + 10 min back stretching routine (see Desk & Back tab). Let muscles
-            repair — this is when growth happens.</p>
+        <div class="ex-row">
+          <div><div class="ex-name">Lateral raises</div><div class="ex-note">Lighter weight, full range of motion</div></div>
+          <div class="ex-sets">3 × 15</div>
         </div>
-      </div>
-
-      <!-- Day 3 -->
-      <div class="day-card" id="d4">
-        <div class="day-header" onclick="toggleDay('d4')">
-          <div class="day-number">03</div>
-          <div>
-            <div class="day-name">Thursday <span class="badge badge-pull">Upper Pull</span></div>
-            <div class="ex-note">Back · Biceps · Rear delts</div>
-          </div>
-          <div class="day-focus">~70 min</div>
-          <span class="chevron">▼</span>
+        <div class="ex-row">
+          <div><div class="ex-name">Tricep cable pushdown + overhead ext.</div></div>
+          <div class="ex-sets">3 × 15</div>
         </div>
-        <div class="day-body">
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rowing_Stationary/0.jpg"
-              alt="Rower" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Rowing machine warm-up</div>
-            </div>
-            <div class="ex-sets">10 min</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Lat_Pulldown/0.jpg"
-              alt="Lat Pulldown" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Lat pulldown (wide grip)</div>
-              <div class="ex-note">Builds V-shape — makes your waist look slimmer</div>
-            </div>
-            <div class="ex-sets">4 × 12</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg"
-              alt="Cable Row" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Seated cable row</div>
-            </div>
-            <div class="ex-sets">4 × 12</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Dumbbell_Row/0.jpg"
-              alt="DB Row" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Single-arm dumbbell row</div>
-            </div>
-            <div class="ex-sets">3 × 12</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Face_Pull/0.jpg"
-              alt="Face Pull" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Face pulls (cable)</div>
-              <div class="ex-note" style="color:var(--green)">Fixes rounded shoulder posture from desk work</div>
-            </div>
-            <div class="ex-sets">3 × 15</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Curl/0.jpg"
-              alt="Curls" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Barbell / dumbbell bicep curls</div>
-            </div>
-            <div class="ex-sets">3 × 15</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hammer_Curls/0.jpg"
-              alt="Hammer Curl" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Hammer curls</div>
-            </div>
-            <div class="ex-sets">3 × 12</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crunch/0.jpg"
-              alt="Cable Crunch" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Ab finisher: Cable crunches + Russian twists</div>
-            </div>
-            <div class="ex-sets">3 × 15</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Friday rest -->
-      <div class="day-card" id="d5">
-        <div class="day-header" onclick="toggleDay('d5')">
-          <div class="day-number">—</div>
-          <div>
-            <div class="day-name">Friday <span class="badge badge-rest">Rest</span></div>
-            <div class="ex-note">Body recovery</div>
-          </div>
-          <div class="day-focus">Off</div>
-          <span class="chevron">▼</span>
-        </div>
-        <div class="day-body">
-          <p class="rest-note">Full rest. Light walk is fine. Foam roll if available. Focus on sleep tonight to prep for
-            Saturday's fat-burner session.</p>
-        </div>
-      </div>
-
-      <!-- Day 4 -->
-      <div class="day-card" id="d6">
-        <div class="day-header" onclick="toggleDay('d6')">
-          <div class="day-number">04</div>
-          <div>
-            <div class="day-name">Saturday <span class="badge badge-hiit">Lower + HIIT</span></div>
-            <div class="ex-note">Fat burner day 🔥</div>
-          </div>
-          <div class="day-focus">~75 min</div>
-          <span class="chevron">▼</span>
-        </div>
-        <div class="day-body">
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg"
-              alt="Goblet Squat" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Goblet squat</div>
-            </div>
-            <div class="ex-sets">4 × 12</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Step-up_with_Knee_Raise/0.jpg"
-              alt="Step Ups" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Step-ups (box / bench)</div>
-            </div>
-            <div class="ex-sets">3 × 12 each</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Hip_Thrust/0.jpg"
-              alt="Hip Thrust" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Hip thrust / glute bridge</div>
-              <div class="ex-note">Also strengthens lower back</div>
-            </div>
-            <div class="ex-sets">3 × 15</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Calf_Raises/0.jpg"
-              alt="Calf Raise" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Calf raises</div>
-            </div>
-            <div class="ex-sets">4 × 20</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Jogging_Treadmill/0.jpg"
-              alt="HIIT" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">HIIT treadmill: 30s sprint / 60s walk</div>
-              <div class="ex-note" style="color:var(--orange)">🔥 Repeat 8–10 rounds — destroys visceral belly fat</div>
-            </div>
-            <div class="ex-sets">20 min</div>
-          </div>
-          <div class="ex-row">
-            <img class="ex-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hanging_Leg_Raise/0.jpg"
-              alt="Leg Raise" loading="lazy" onclick="openModal(this.src)">
-            <div class="ex-info">
-              <div class="ex-name">Hanging knee raises + Bicycle crunches</div>
-            </div>
-            <div class="ex-sets">3 × 15</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sunday -->
-      <div class="day-card" id="d7">
-        <div class="day-header" onclick="toggleDay('d7')">
-          <div class="day-number">—</div>
-          <div>
-            <div class="day-name">Sunday <span class="badge badge-rest">Full Rest</span></div>
-            <div class="ex-note">Recover & reset</div>
-          </div>
-          <div class="day-focus">Off</div>
-          <span class="chevron">▼</span>
-        </div>
-        <div class="day-body">
-          <p class="rest-note">Sleep in, light walk, foam roll, back stretches. This is when your muscles actually grow
-            and fat metabolism resets. Protect this day.</p>
+        <div class="ex-row">
+          <div><div class="ex-name">Ab finisher: Plank + Leg raises</div><div class="ex-note" style="color:var(--orange)">Optional core finisher for trunk strength and routine consistency</div></div>
+          <div class="ex-sets">3 × 30s / 12</div>
         </div>
       </div>
     </div>
 
-    <!-- ═══ DIET TAB ═══ -->
-    <div id="tab-diet" class="tab-panel">
-      <div class="alert alert-warn" style="margin-top:8px;">You skip breakfast often — this is a primary driver of belly
-        fat and stress eating. The plan below fixes this with a quick, high-protein morning meal (under 10 min to prep).
+    <!-- Day 2 -->
+    <div class="day-card" id="d2">
+      <div class="day-header" onclick="toggleDay('d2')">
+        <div class="day-number">02</div>
+        <div>
+          <div class="day-name">Tuesday <span class="badge badge-lower">Lower Body</span></div>
+          <div class="ex-note">Quads · Glutes · Hamstrings · Core</div>
+        </div>
+        <div class="day-focus">~70 min</div>
+        <span class="chevron">▼</span>
       </div>
-
-      <div class="macro-split">
-        <div style="flex-shrink:0; text-align:center; min-width:80px;">
-          <div style="font-family:var(--font-display); font-size:40px; line-height:1; color:var(--accent)">1,850</div>
-          <div style="font-size:11px; color:var(--muted); letter-spacing:.06em; text-transform:uppercase">kcal / day
-          </div>
+      <div class="day-body">
+        <div class="ex-row">
+          <div><div class="ex-name">Cycling warm-up</div></div>
+          <div class="ex-sets">10 min</div>
         </div>
-        <div class="macro-bar-wrap">
-          <div class="macro-bar-label"><span style="color:var(--red)">Protein 130g</span><span
-              style="color:var(--muted)">25%</span></div>
-          <div class="macro-bar-track">
-            <div class="macro-bar-fill" style="width:25%; background:var(--red)"></div>
-          </div>
-          <div class="macro-bar-label"><span style="color:var(--orange)">Carbs 190g</span><span
-              style="color:var(--muted)">40%</span></div>
-          <div class="macro-bar-track">
-            <div class="macro-bar-fill" style="width:40%; background:var(--orange)"></div>
-          </div>
-          <div class="macro-bar-label"><span style="color:var(--green)">Fats 60g</span><span
-              style="color:var(--muted)">35%</span></div>
-          <div class="macro-bar-track" style="margin-bottom:0">
-            <div class="macro-bar-fill" style="width:35%; background:var(--green)"></div>
-          </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Barbell back squat</div><div class="ex-note">King of all exercises — burns maximum calories</div></div>
+          <div class="ex-sets">4 × 10</div>
         </div>
-      </div>
-
-      <div class="section-label">Daily meal plan</div>
-
-      <div class="meal-card">
-        <div class="meal-time">On waking · 8:00–8:15 AM</div>
-        <div class="meal-main">1 glass warm water + juice of ½ lemon</div>
-        <div class="meal-alt">Kick-starts digestion and reduces morning bloating. Do this before checking your phone.</div>
-      </div>
-      <div class="meal-card">
-        <div class="meal-time">Breakfast · 8:30–9:00 AM <span class="meal-kcal">~450 kcal</span> <span
-            style="color:var(--red); font-size:11px; font-weight:600">DON'T SKIP</span></div>
-        <div class="meal-main">1 bowl <strong style="color:var(--accent);">Plain Oats</strong> <span style="color:var(--muted); font-size:13px;">(70g dry)</span> with milk <span style="color:var(--muted); font-size:13px;">(200ml)</span> + 2 boiled eggs <span style="color:var(--muted); font-size:13px;">(~100g)</span></div>
-        <div class="meal-alt">
-          🥚 <strong style="color:var(--text)">Boiled egg hack</strong> — boil 2–3 eggs the night before, refrigerate, and just peel and eat in the morning. Zero cooking time.<br>
-          🍌 <strong style="color:var(--text)">To make oats tasty</strong> — add any of these easily available fruits: <strong style="color:var(--text)">banana</strong> (best, always available), <strong style="color:var(--text)">papaya chunks</strong>, <strong style="color:var(--text)">pomegranate seeds</strong>, or <strong style="color:var(--text)">chikoo (sapota)</strong>. A pinch of cinnamon + 1 tsp honey also adds great natural flavour.<br>
-          <span style="color:var(--green)">✅ Quick to make</span> — soak oats in milk overnight (cold oats) and it's ready to eat straight from the fridge in the morning. Zero cooking time.<br>
-          <span style="color:var(--red)">Avoid flavoured oats packets</span> (Quaker, Saffola flavoured etc.) — they contain 12–15g added sugar per serving and directly stall fat loss.<br>
+        <div class="ex-row">
+          <div><div class="ex-name">Leg press machine</div></div>
+          <div class="ex-sets">3 × 12</div>
         </div>
-      </div>
-      <div class="meal-card">
-        <div class="meal-time">Mid-morning snack · 11:30 AM <span class="meal-kcal">~150 kcal</span></div>
-        <div class="meal-main">Greek yogurt <span style="color:var(--muted); font-size:13px;">(150g)</span> + 10–12 almonds <span style="color:var(--muted); font-size:13px;">(~15g)</span></div>
-        <div class="meal-alt">OR 1 banana <span style="color:var(--muted);">(~120g)</span> + black coffee (no sugar). Keep this at your desk to avoid canteen temptation.</div>
-      </div>
-
-      <!-- CANTEEN LUNCH CARD -->
-      <div class="meal-card" style="border-color: rgba(74,158,255,0.25);">
-        <div class="meal-time">Lunch · 1:30–2:30 PM <span class="meal-kcal">~500–600 kcal</span> <span style="background:rgba(74,158,255,0.15); color:var(--blue); font-size:10px; font-weight:600; padding:2px 8px; border-radius:20px; margin-left:6px; border:1px solid rgba(74,158,255,0.25);">🏢 OFFICE CANTEEN</span></div>
-        <div class="meal-main">You can't control the menu — but you can control what you pick.</div>
-        <div class="meal-alt" style="margin-top:10px;">
-          <div class="canteen-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
-            <div style="background:rgba(61,220,132,0.07); border:1px solid rgba(61,220,132,0.18); border-radius:8px; padding:10px;">
-              <div style="font-size:11px; font-weight:600; color:var(--green); letter-spacing:.06em; margin-bottom:6px;">✅ PRIORITISE</div>
-              <div style="font-size:12px; color:var(--muted2); line-height:1.8;">
-                Grilled / tandoori chicken <span style="color:var(--muted);">(~150g)</span> or fish <span style="color:var(--muted);">(~150g)</span><br>
-                Dal — 1 katori <span style="color:var(--muted);">(~150g)</span><br>
-                Sabzi / dry vegetable dishes <span style="color:var(--muted);">(~100g)</span><br>
-                Salad — eat this first always <span style="color:var(--muted);">(~80g)</span><br>
-                Curd / raita <span style="color:var(--muted);">(~100g)</span><br>
-                1–2 rotis <span style="color:var(--muted);">(~40g each)</span><br>
-                Rice if needed — half katori <span style="color:var(--muted);">(~75g cooked)</span>
-              </div>
-            </div>
-            <div style="background:rgba(255,87,87,0.07); border:1px solid rgba(255,87,87,0.18); border-radius:8px; padding:10px;">
-              <div style="font-size:11px; font-weight:600; color:var(--red); letter-spacing:.06em; margin-bottom:6px;">❌ AVOID / LIMIT</div>
-              <div style="font-size:12px; color:var(--muted2); line-height:1.8;">
-                Creamy curries (butter chicken, korma)<br>
-                Fried items (pakoda, fries, puri)<br>
-                Large plate of rice — half portion max<br>
-                Sugary drinks / canteen juices<br>
-                Dessert / mithai / kheer<br>
-                White bread / maida roti<br>
-                Second helpings of carbs
-              </div>
-            </div>
-          </div>
-          <div style="margin-top:10px; padding:8px 12px; background:rgba(232,240,74,0.06); border:1px solid rgba(232,240,74,0.15); border-radius:8px; font-size:12px; color:#c8d060; line-height:1.6;">
-            💡 <strong style="color:var(--accent)">Canteen strategy:</strong> Fill half your plate with sabzi + salad first, then add protein (dal / chicken / fish), then a small portion of carbs. This order naturally limits overeating without measuring anything.
-          </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Romanian deadlift (light–moderate weight)</div><div class="ex-note" style="color:var(--green)">Strengthens lower back — reduces your back pain</div></div>
+          <div class="ex-sets">3 × 12</div>
         </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-time">Pre-workout snack · 6:00–6:30 PM <span class="meal-kcal">~210 kcal</span></div>
-        <div class="meal-main">2 boiled eggs <span style="color:var(--muted); font-size:13px;">(~100g)</span> + 1 banana <span style="color:var(--muted); font-size:13px;">(~120g)</span></div>
-        <div class="meal-alt">🥚 Already boiling eggs at night for breakfast — just boil 2 extra and set aside for evening. Zero extra effort.<br>Banana gives fast carbs for energy · eggs provide protein so muscles don't break down during training.</div>
-      </div>
-      <div class="meal-card">
-        <div class="meal-time">Post-workout · 9:00–9:30 PM <span class="meal-kcal">~100 kcal</span></div>
-        <div class="meal-main">1 scoop whey protein <span style="color:var(--muted); font-size:13px;">(~30g)</span> in water / low-fat milk <span style="color:var(--muted); font-size:13px;">(200ml)</span></div>
-        <div class="meal-alt">Within 30–45 min of finishing workout for best muscle recovery</div>
-      </div>
-      <div class="meal-card">
-        <div class="meal-time">Dinner · 10:00–10:30 PM <span class="meal-kcal">~450 kcal</span></div>
-        <div class="meal-main">Grilled chicken <span style="color:var(--muted); font-size:13px;">(150–180g)</span> / fish <span style="color:var(--muted); font-size:13px;">(150g)</span> / 2–3 eggs + sautéed vegetables <span style="color:var(--muted); font-size:13px;">(150–200g)</span></div>
-        <div class="meal-alt">+ 1 roti <span style="color:var(--muted);">(~40g)</span> OR skip roti and have a larger protein + veggie portion<br><strong
-            style="color:var(--orange)">Keep carbs LOW at dinner</strong> — critical for fat loss, especially since you eat late</div>
-      </div>
-      <div class="meal-card">
-        <div class="meal-time">Before bed · 12:30 AM <span class="meal-kcal">~50 kcal</span></div>
-        <div class="meal-main">1 glass warm milk <span style="color:var(--muted); font-size:13px;">(200ml)</span> with a pinch of turmeric <span style="color:var(--muted); font-size:13px;">(~1g)</span></div>
-        <div class="meal-alt">Aids muscle recovery overnight. Keep it light — no solid food after 11 PM.</div>
-      </div>
-
-      <div class="alert alert-danger" style="margin-top:16px;"><strong>Avoid:</strong> Sugary drinks, alcohol, fried food, biscuits/chips at your desk, flavoured oats packets, canteen desserts, and solid food after 11:30 PM. Eating heavy food right before a 1 AM bedtime is one of the fastest ways to accumulate belly fat.</div>
-    </div>
-
-    <!-- ═══ DESK & BACK TAB ═══ -->
-    <div id="tab-desk" class="tab-panel">
-      <div class="alert alert-warn" style="margin-top:8px;">Your occasional back pain and belly fat are connected — both
-        caused by weak core muscles from prolonged sitting. These exercises fix both simultaneously.</div>
-
-      <div class="section-label">At-desk routine — every 90 minutes</div>
-      <div class="tips-card">
-        <h3>Set a phone alarm every 90 min ⏰</h3>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--blue)"></div>
-          <div><span class="tip-strong">Stand up and walk</span> — 2–3 min around your floor. Non-negotiable.</div>
+        <div class="ex-row">
+          <div><div class="ex-name">Walking lunges</div></div>
+          <div class="ex-sets">3 × 12 each</div>
         </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--blue)"></div>
-          <div><span class="tip-strong">Seated cat-cow stretch</span> — arch and round your back 10 times slowly</div>
+        <div class="ex-row">
+          <div><div class="ex-name">Leg curl machine</div></div>
+          <div class="ex-sets">3 × 15</div>
         </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--blue)"></div>
-          <div><span class="tip-strong">Neck rolls</span> — slow, controlled, 5 each side</div>
+        <div class="ex-row">
+          <div><div class="ex-name">Core circuit: Dead bug + Bird dog + Hollow hold</div><div class="ex-note">Safe for your back, activates deep core muscles</div></div>
+          <div class="ex-sets">3 rounds</div>
         </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--blue)"></div>
-          <div><span class="tip-strong">Shoulder blade squeeze</span> — pinch blades together, hold 5 sec, 10 reps</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--blue)"></div>
-          <div><span class="tip-strong">Hip flexor stretch</span> — step one foot forward, push hips forward gently, 30
-            sec each side</div>
-        </div>
-      </div>
-
-      <div class="section-label">10-min morning back routine — every day</div>
-      <div class="tips-card">
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--green)"></div>
-          <div><span class="tip-strong">Child's pose</span> — 60 seconds, decompresses the spine</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--green)"></div>
-          <div><span class="tip-strong">Cat-cow on all fours</span> — 10 reps slow, morning mobility</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--green)"></div>
-          <div><span class="tip-strong">Bird dog</span> — 10 reps each side, strengthens deep core + lower back safely
-          </div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--green)"></div>
-          <div><span class="tip-strong">Glute bridge</span> — 3 × 15 reps, activates glutes which support the spine
-          </div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--green)"></div>
-          <div><span class="tip-strong">Dead bug</span> — 10 reps each side, safest core exercise for bad backs</div>
-        </div>
-      </div>
-
-      <div class="section-label">Desk setup fixes — do today</div>
-      <div class="tips-card">
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--orange)"></div>
-          <div>Screen at eye level — stack books under laptop if needed</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--orange)"></div>
-          <div>Sit with feet flat on floor, hips slightly above knees</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--orange)"></div>
-          <div>Small rolled towel or lumbar cushion behind lower back</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--orange)"></div>
-          <div>Phone alarm every 90 min as "stand up" reminder</div>
+        <div class="ex-row">
+          <div><div class="ex-name">Treadmill incline walk (cool-down)</div></div>
+          <div class="ex-sets">10 min</div>
         </div>
       </div>
     </div>
 
-    <!-- ═══ SLEEP & STRESS TAB ═══ -->
-    <div id="tab-sleep" class="tab-panel">
-      <div class="alert alert-danger" style="margin-top:8px;">Poor sleep + stress eating are the hidden #1 cause of
-        belly fat. Cortisol (the stress hormone) directly signals your body to store fat around the belly. Fixing sleep
-        will visibly accelerate your results.</div>
-
-      <div class="section-label">Sleep protocol — target 7 hrs (your schedule)</div>
-      <div class="tips-card">
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--blue)"></div>
-          <div>Your window: <span class="tip-strong">1:00 AM → 8:00 AM = 7 hours</span> — workable, but tight for muscle recovery. Try to be in bed by 12:30–12:45 AM to get closer to 7.5 hrs when possible.</div>
+    <!-- Wednesday rest -->
+    <div class="day-card" id="d3">
+      <div class="day-header" onclick="toggleDay('d3')">
+        <div class="day-number">—</div>
+        <div>
+          <div class="day-name">Wednesday <span class="badge badge-rest">Active Rest</span></div>
+          <div class="ex-note">Recovery day</div>
         </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--blue)"></div>
-          <div>Wind-down starts at <span class="tip-strong">12:30 AM</span> — no more screens, no more food, no more work after this</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--blue)"></div>
-          <div>Room temperature ~22–24°C and dark — even with a late bedtime, sleep quality determines recovery more than duration</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--blue)"></div>
-          <div>No caffeine after <span class="tip-strong">7:00 PM</span> — caffeine has a 6-hour half-life, so anything after 7 PM directly delays your 1 AM sleep</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--blue)"></div>
-          <div>1 glass warm turmeric milk at 12:30 AM — the casein in milk feeds muscle repair through the night</div>
-        </div>
+        <div class="day-focus">Light</div>
+        <span class="chevron">▼</span>
       </div>
-
-      <div class="section-label">Beating stress eating</div>
-      <div class="tips-card">
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--red)"></div>
-          <div><span class="tip-strong">Never sit hungry at your desk</span> — keep roasted chana, almonds, or fruit at
-            your desk always</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--red)"></div>
-          <div><span class="tip-strong">The 10-minute rule</span> — when a craving hits, drink water and wait 10 min.
-            70% of cravings pass</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--red)"></div>
-          <div><span class="tip-strong">Don't stock junk at home</span> — if it isn't there, you can't eat it at 12 AM
-          </div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--red)"></div>
-          <div><span class="tip-strong">Eat every 3–4 hours</span> — the meal plan prevents hunger spikes that cause
-            stress eating</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--red)"></div>
-          <div><span class="tip-strong">Box breathing</span> — when stressed: 4 sec in, 4 hold, 4 out. Lowers cortisol
-            fast</div>
-        </div>
+      <div class="day-body">
+        <p class="rest-note">20 min walk outside + 10 min back stretching routine (see Desk & Back tab). Let muscles repair — this is when growth happens.</p>
       </div>
+    </div>
 
-      <div class="section-label">Expected results</div>
-      <div class="tips-card">
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-label">Week 1–2</div>
-            <div class="tl-desc"><strong>Less bloating</strong>, more energy, better sleep quality</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-label">Month 1</div>
-            <div class="tl-desc"><strong>2–3 kg down</strong>, belt fits looser, back pain reduces</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-label">Month 2–3</div>
-            <div class="tl-desc"><strong>Visible waist definition</strong>, stronger core, better posture at desk</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-label">Month 4–6</div>
-            <div class="tl-desc"><strong>6–8 kg fat loss</strong>, lean physique, belly visibly flat</div>
-          </div>
+    <!-- Day 3 -->
+    <div class="day-card" id="d4">
+      <div class="day-header" onclick="toggleDay('d4')">
+        <div class="day-number">03</div>
+        <div>
+          <div class="day-name">Thursday <span class="badge badge-pull">Upper Pull</span></div>
+          <div class="ex-note">Back · Biceps · Rear delts</div>
+        </div>
+        <div class="day-focus">~70 min</div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="ex-row">
+          <div><div class="ex-name">Rowing machine warm-up</div></div>
+          <div class="ex-sets">10 min</div>
+        </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Lat pulldown (wide grip)</div><div class="ex-note">Builds V-shape — makes your waist look slimmer</div></div>
+          <div class="ex-sets">4 × 12</div>
+        </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Seated cable row</div></div>
+          <div class="ex-sets">4 × 12</div>
+        </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Single-arm dumbbell row</div></div>
+          <div class="ex-sets">3 × 12</div>
+        </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Face pulls (cable)</div><div class="ex-note" style="color:var(--green)">Fixes rounded shoulder posture from desk work</div></div>
+          <div class="ex-sets">3 × 15</div>
+        </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Barbell / dumbbell bicep curls</div></div>
+          <div class="ex-sets">3 × 15</div>
+        </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Hammer curls</div></div>
+          <div class="ex-sets">3 × 12</div>
+        </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Ab finisher: Cable crunches + Russian twists</div></div>
+          <div class="ex-sets">3 × 15</div>
         </div>
       </div>
     </div>
 
-    <!-- ═══ MOBILITY TAB ═══ -->
-    <div id="tab-mobility" class="tab-panel">
-
-      <div class="alert alert-warn" style="margin-top:8px;">
-        Body soreness as a beginner is completely normal — your muscles are adapting to new stress. But
-        <strong>tightness and recurring pain</strong> from your desk job + new gym routine need active management. This
-        mobility plan runs <em>alongside</em> your workouts, not instead of them.
+    <!-- Friday rest -->
+    <div class="day-card" id="d5">
+      <div class="day-header" onclick="toggleDay('d5')">
+        <div class="day-number">—</div>
+        <div>
+          <div class="day-name">Friday <span class="badge badge-rest">Rest</span></div>
+          <div class="ex-note">Body recovery</div>
+        </div>
+        <div class="day-focus">Off</div>
+        <span class="chevron">▼</span>
       </div>
-
-      <!-- Pain guide -->
-      <div class="section-label">Know your pain — beginner's guide</div>
-      <div class="pain-grid">
-        <div class="pain-card">
-          <div class="pain-card-title" style="color:var(--green)">✅ Normal soreness — keep going</div>
-          <ul>
-            <li>Dull ache that starts 24–48 hrs after workout</li>
-            <li>Muscle feels tender when pressed</li>
-            <li>Stiffness that eases once you warm up</li>
-            <li>Soreness fades within 2–3 days</li>
-            <li>Both sides of body feel the same</li>
-          </ul>
-        </div>
-        <div class="pain-card">
-          <div class="pain-card-title" style="color:var(--red)">🛑 Stop & rest — don't push through</div>
-          <ul>
-            <li>Sharp or stabbing pain during exercise</li>
-            <li>Pain in joints (knees, shoulders, lower back)</li>
-            <li>Swelling, redness, or warmth around a joint</li>
-            <li>Pain only on one side of the body</li>
-            <li>Pain that gets worse as workout continues</li>
-          </ul>
-        </div>
+      <div class="day-body">
+        <p class="rest-note">Full rest. Light walk is fine. Foam roll if available. Focus on sleep tonight to prep for Saturday's fat-burner session.</p>
       </div>
-
-      <!-- When to do mobility -->
-      <div class="section-label">When to do each routine</div>
-      <div class="tips-card" style="margin-bottom:20px;">
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-label" style="color:var(--purple); min-width:110px;">Before gym</div>
-            <div class="tl-desc"><strong>Dynamic warm-up</strong> — 8–10 min. Moves your joints through full range.
-              Never stretch cold muscles statically before lifting.</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-label" style="color:var(--purple); min-width:110px;">After gym</div>
-            <div class="tl-desc"><strong>Static cool-down</strong> — 10–12 min. Hold each stretch. This is when
-              flexibility is actually built.</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-label" style="color:var(--purple); min-width:110px;">Rest days</div>
-            <div class="tl-desc"><strong>Full body flow</strong> — 15 min. Speeds recovery, reduces next-day soreness,
-              improves posture from desk work.</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-label" style="color:var(--purple); min-width:110px;">Pain days</div>
-            <div class="tl-desc"><strong>Gentle relief routine</strong> — skip the gym, do the pain-relief section below
-              instead. Don't skip moving entirely.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section 1: Pre-workout dynamic warm-up -->
-      <div class="section-label">Pre-workout dynamic warm-up — 8–10 min</div>
-      <div class="mob-card open" id="m1">
-        <div class="mob-header" onclick="toggleMob('m1')">
-          <div class="mob-icon">🔥</div>
-          <div>
-            <div class="mob-title">Dynamic warm-up <span class="badge badge-mobility">Before every gym session</span>
-            </div>
-            <div class="mob-sub">Wakes up joints, primes muscles, prevents injury</div>
-          </div>
-          <div class="mob-duration">8–10 min</div>
-          <span class="chevron">▼</span>
-        </div>
-        <div class="mob-body">
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Arm_Circles/0.jpg"
-              alt="Arm Circles" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Arm circles (forward + backward)</div>
-              <div class="mob-note">Start small, gradually get bigger. Warms up shoulder joints — critical before any
-                pressing movement.</div>
-            </div>
-            <div class="mob-hold">20 each way</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Leg_Raises/0.jpg"
-              alt="Leg Swings" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Leg swings (forward/back + side to side)</div>
-              <div class="mob-note">Hold a wall for balance. Lubricates hip joint — essential before squats and lunges
-                to protect your lower back.</div>
-            </div>
-            <div class="mob-hold">15 each leg</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Hip_Circles/0.jpg"
-              alt="Hip Circles" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Hip circles</div>
-              <div class="mob-note">Hands on hips, big slow circles. Unlocks the hip flexors that tighten from sitting.
-                Directly reduces lower back pain.</div>
-            </div>
-            <div class="mob-hold">10 each direction</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Walking_Lunge/0.jpg"
-              alt="Walking Lunge" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Bodyweight walking lunges</div>
-              <div class="mob-note">Slow and controlled with no weight. Warms hamstrings, glutes, and hip flexors all at
-                once.</div>
-            </div>
-            <div class="mob-hold">10 each leg</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Squat/0.jpg"
-              alt="Bodyweight Squat" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Bodyweight squats (slow tempo)</div>
-              <div class="mob-note">3 sec down, 1 sec pause at bottom, 1 sec up. Warms the entire lower body and
-                activates glutes before loading.</div>
-            </div>
-            <div class="mob-hold">15 reps</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pushups/0.jpg"
-              alt="Push-up" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Push-up to downward dog</div>
-              <div class="mob-note">Do a push-up, then press hips up into a downward dog, hold 2 sec. Warms chest,
-                shoulders, wrists and hamstrings together.</div>
-            </div>
-            <div class="mob-hold">8 reps</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Inchworm/0.jpg"
-              alt="Inchworm" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Inchworm walk-outs</div>
-              <div class="mob-note">Stand, fold forward, walk hands out to plank, walk feet to hands, stand up. Warms
-                the entire posterior chain — great before deadlifts and rows.</div>
-            </div>
-            <div class="mob-hold">6 reps</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section 2: Post-workout static stretch -->
-      <div class="section-label">Post-workout static cool-down — 10–12 min</div>
-      <div class="mob-card" id="m2">
-        <div class="mob-header" onclick="toggleMob('m2')">
-          <div class="mob-icon">🧊</div>
-          <div>
-            <div class="mob-title">Static cool-down <span class="badge badge-mobility">After every gym session</span>
-            </div>
-            <div class="mob-sub">Reduces soreness, builds flexibility, lowers heart rate</div>
-          </div>
-          <div class="mob-duration">10–12 min</div>
-          <span class="chevron">▼</span>
-        </div>
-        <div class="mob-body">
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Hamstring_and_Calf_Stretch/0.jpg"
-              alt="Hamstring Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Standing hamstring stretch</div>
-              <div class="mob-note">Step one foot forward, hinge at hips, keep back flat. Essential after squats and
-                deadlifts to release tight hamstrings that pull on your lower back.</div>
-            </div>
-            <div class="mob-hold">40 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Hip_Flexor/0.jpg"
-              alt="Hip Flexor Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Kneeling hip flexor stretch (lunge position)</div>
-              <div class="mob-note">The most important stretch for desk workers. Directly counteracts hours of sitting.
-                Hold gently — if your hip flexors are tight, you'll feel this immediately.</div>
-            </div>
-            <div class="mob-hold">45 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ankle_On_The_Knee/0.jpg"
-              alt="Pigeon Pose" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Figure-4 / pigeon pose (glute stretch)</div>
-              <div class="mob-note">Lie on back, cross ankle over opposite knee, pull toward chest. Releases glutes and
-                piriformis — tightness here causes lower back and knee pain.</div>
-            </div>
-            <div class="mob-hold">45 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chest_And_Front_Of_Shoulder_Stretch/0.jpg"
-              alt="Chest Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Door frame chest stretch</div>
-              <div class="mob-note">Arms at 90° on door frame, lean forward gently. Opens the chest that gets compressed
-                from bench pressing and desk posture. Do this after every upper push day.</div>
-            </div>
-            <div class="mob-hold">40 sec × 2</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Overhead_Lat/0.jpg"
-              alt="Lat Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Overhead lat stretch (hang or reach)</div>
-              <div class="mob-note">Reach one arm overhead and lean to the opposite side. Releases lats and the sides of
-                your back after pull days. Reduces that upper back tightness.</div>
-            </div>
-            <div class="mob-hold">35 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Childs_Pose/0.jpg"
-              alt="Childs Pose" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Child's pose</div>
-              <div class="mob-note">Kneel, sit back on heels, reach arms forward on the floor. The single best
-                decompression for the spine. Always end every session with this. Breathe deeply.</div>
-            </div>
-            <div class="mob-hold">60 seconds</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/All_Fours_Quad_Stretch/0.jpg"
-              alt="Quad Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Lying quad stretch</div>
-              <div class="mob-note">Lie on side, pull top foot toward glutes. Quad tightness is the #1 cause of knee
-                pain for beginners doing squats and lunges — never skip this on leg days.</div>
-            </div>
-            <div class="mob-hold">40 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side-Lying_Floor_Stretch/0.jpg"
-              alt="Thoracic Rotation" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Thoracic spine rotation (thread the needle)</div>
-              <div class="mob-note">On all fours, thread one arm under your body and rotate. Releases upper back tension
-                from desk work and pressing exercises. Your back pain will love this one.</div>
-            </div>
-            <div class="mob-hold">30 sec each</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section 3: Rest day full body flow -->
-      <div class="section-label">Rest day full-body flow — Wed & Sun, 15 min</div>
-      <div class="mob-card" id="m3">
-        <div class="mob-header" onclick="toggleMob('m3')">
-          <div class="mob-icon">🌿</div>
-          <div>
-            <div class="mob-title">Full-body recovery flow <span class="badge badge-mobility">Rest days</span></div>
-            <div class="mob-sub">Do this on Wed & Sun instead of gym — speeds recovery, fixes posture</div>
-          </div>
-          <div class="mob-duration">15 min</div>
-          <span class="chevron">▼</span>
-        </div>
-        <div class="mob-body">
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cat_Stretch/0.jpg"
-              alt="Cat Cow" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Cat-cow (slow breathing)</div>
-              <div class="mob-note">Inhale as you arch back (cow), exhale as you round (cat). Syncs breath with
-                movement. The gentlest way to wake up a stiff spine. 5 breaths each position.</div>
-            </div>
-            <div class="mob-hold">10 slow reps</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Worlds_Greatest_Stretch/0.jpg"
-              alt="World Greatest Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">World's greatest stretch</div>
-              <div class="mob-note">Lunge forward, place same-side hand inside foot, rotate other arm to sky. Hits hip
-                flexor, thoracic spine, groin, and hamstring in one move. Best bang-for-buck stretch for desk workers.
-              </div>
-            </div>
-            <div class="mob-hold">30 sec each side</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Glute/0.jpg"
-              alt="90-90 Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">90/90 hip stretch</div>
-              <div class="mob-note">Sit with both knees at 90° (one in front, one to side). Sit tall. Loaded hip stretch
-                that addresses both internal and external hip rotation — directly reduces lower back pain from sitting.
-              </div>
-            </div>
-            <div class="mob-hold">45 sec each side</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg"
-              alt="Shoulder Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Cross-body shoulder stretch</div>
-              <div class="mob-note">Pull one arm across your chest with the opposite hand. Releases rear deltoid and
-                upper back — very common soreness area for beginners after pull and push days.</div>
-            </div>
-            <div class="mob-hold">35 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side-Lying_Floor_Stretch/0.jpg"
-              alt="Spinal Twist" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Supine spinal twist</div>
-              <div class="mob-note">Lie on back, bring one knee across body to the floor, arms spread wide. The most
-                effective spinal decompression stretch. Directly relieves the lower back pain you occasionally
-                experience.</div>
-            </div>
-            <div class="mob-hold">45 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Gastrocnemius_Calf_Stretch/0.jpg"
-              alt="Calf Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Standing calf stretch</div>
-              <div class="mob-note">Heel of back foot flat, lean into a wall. Tight calves from the treadmill and HIIT
-                sessions contribute to knee and foot soreness if left unaddressed.</div>
-            </div>
-            <div class="mob-hold">40 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Stretch/0.jpg"
-              alt="Tricep Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Overhead tricep stretch</div>
-              <div class="mob-note">Raise one arm, bend elbow behind head, gently press elbow with opposite hand. Tricep
-                soreness after push days is very common for beginners — this directly relieves it.</div>
-            </div>
-            <div class="mob-hold">30 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Childs_Pose/0.jpg"
-              alt="Childs Pose" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Extended child's pose (finish here always)</div>
-              <div class="mob-note">Hold this for a full minute and just breathe. Let gravity do the stretching. This
-                signals your nervous system to switch from work-mode to recovery-mode.</div>
-            </div>
-            <div class="mob-hold">60–90 seconds</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section 4: Pain-specific relief -->
-      <div class="section-label">When you have body pain — relief routines</div>
-      <div class="alert alert-danger">If you are in pain, <strong>skip the gym for that day</strong> and do the relevant
-        routine below instead. Pushing through sharp pain as a beginner causes injuries that set you back weeks, not
-        days.</div>
-
-      <div class="mob-card" id="m4">
-        <div class="mob-header" onclick="toggleMob('m4')">
-          <div class="mob-icon">🔴</div>
-          <div>
-            <div class="mob-title">Lower back pain relief <span class="badge badge-mobility">On pain days</span></div>
-            <div class="mob-sub">Your most common pain — caused by desk sitting + new exercises</div>
-          </div>
-          <div class="mob-duration">10 min</div>
-          <span class="chevron">▼</span>
-        </div>
-        <div class="mob-body">
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hug_Knees_To_Chest/0.jpg"
-              alt="Knee to Chest" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Knee-to-chest pull</div>
-              <div class="mob-note">Lie on back, pull both knees to chest, hold. Immediately decompresses the lumbar
-                spine. Start here whenever your back hurts.</div>
-            </div>
-            <div class="mob-hold">60 sec</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cat_Stretch/0.jpg"
-              alt="Cat Cow" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Cat-cow (10 very slow reps)</div>
-              <div class="mob-note">Breathe through each rep. Never force the range — just move as far as feels
-                comfortable. This rehydrates the spinal discs.</div>
-            </div>
-            <div class="mob-hold">10 slow reps</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side-Lying_Floor_Stretch/0.jpg"
-              alt="Supine Twist" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Supine spinal twist</div>
-              <div class="mob-note">Don't force the shoulder to the floor. Let gravity work. Hold and breathe 5 slow
-                breaths before switching sides.</div>
-            </div>
-            <div class="mob-hold">45 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Hip_Flexor/0.jpg"
-              alt="Hip Flexor" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Kneeling hip flexor stretch</div>
-              <div class="mob-note">Tight hip flexors from sitting are almost always contributing to your lower back
-                pain. This is the most important stretch to fix it long-term.</div>
-            </div>
-            <div class="mob-hold">60 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Glute_Bridge/0.jpg"
-              alt="Glute Bridge" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Glute bridge (slow, bodyweight only)</div>
-              <div class="mob-note">Activates glutes which take load off the lower back. Do these gently even on pain
-                days — they help, not hurt. 2 sec up, hold 2 sec, 3 sec down.</div>
-            </div>
-            <div class="mob-hold">2 × 10 slow</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Childs_Pose/0.jpg"
-              alt="Childs Pose" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Child's pose (finish)</div>
-              <div class="mob-note">Always finish with this. Apply a heat pad to your lower back for 15 min after this
-                routine — heat (not ice) is better for muscular lower back pain.</div>
-            </div>
-            <div class="mob-hold">90 seconds</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mob-card" id="m5">
-        <div class="mob-header" onclick="toggleMob('m5')">
-          <div class="mob-icon">🟠</div>
-          <div>
-            <div class="mob-title">Upper body soreness relief <span class="badge badge-mobility">After push/pull
-                days</span></div>
-            <div class="mob-sub">Chest, shoulder, and back soreness from pressing and rowing</div>
-          </div>
-          <div class="mob-duration">8 min</div>
-          <span class="chevron">▼</span>
-        </div>
-        <div class="mob-body">
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chest_And_Front_Of_Shoulder_Stretch/0.jpg"
-              alt="Chest Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Doorframe chest stretch</div>
-              <div class="mob-note">Relief for that tight, sore feeling across the chest after bench press. Keeps your
-                shoulders from rounding forward over time.</div>
-            </div>
-            <div class="mob-hold">40 sec × 2</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg"
-              alt="Shoulder" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Cross-body shoulder stretch</div>
-              <div class="mob-note">Targets the rear deltoid — sore after lat pulldowns and rows. Keep shoulder down
-                (don't let it shrug up).</div>
-            </div>
-            <div class="mob-hold">35 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Stretch/0.jpg"
-              alt="Tricep" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Overhead tricep stretch</div>
-              <div class="mob-note">Sore triceps are very common in the first month of push training. This immediately
-                relieves the ache at the back of the arm.</div>
-            </div>
-            <div class="mob-hold">30 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Overhead_Lat/0.jpg"
-              alt="Lat Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Lat side bend stretch</div>
-              <div class="mob-note">Reach one arm overhead and lean away. Relieves that deep ache along the side of your
-                back after pull days.</div>
-            </div>
-            <div class="mob-hold">35 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side-Lying_Floor_Stretch/0.jpg"
-              alt="Thoracic" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Thread the needle (thoracic rotation)</div>
-              <div class="mob-note">On all fours, thread one arm under body, shoulder to floor. The #1 stretch for upper
-                back stiffness from both desk work and rowing movements.</div>
-            </div>
-            <div class="mob-hold">30 sec each</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mob-card" id="m6">
-        <div class="mob-header" onclick="toggleMob('m6')">
-          <div class="mob-icon">🟡</div>
-          <div>
-            <div class="mob-title">Leg soreness relief <span class="badge badge-mobility">After lower body days</span>
-            </div>
-            <div class="mob-sub">Quad, hamstring, and glute soreness after squat and lunge days</div>
-          </div>
-          <div class="mob-duration">8 min</div>
-          <span class="chevron">▼</span>
-        </div>
-        <div class="mob-body">
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/All_Fours_Quad_Stretch/0.jpg"
-              alt="Quad Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Lying quad stretch</div>
-              <div class="mob-note">Quad DOMS (delayed soreness) is the #1 beginner complaint after squat day. This is
-                the fastest fix. Avoid kneeling version if knees are sore.</div>
-            </div>
-            <div class="mob-hold">45 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Hamstring_and_Calf_Stretch/0.jpg"
-              alt="Hamstring" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Standing hamstring stretch</div>
-              <div class="mob-note">Don't lock the knee aggressively. A soft bend is fine. Hamstrings are slow to loosen
-                — breathe into the stretch and be patient.</div>
-            </div>
-            <div class="mob-hold">45 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ankle_On_The_Knee/0.jpg"
-              alt="Glute Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Figure-4 glute stretch</div>
-              <div class="mob-note">Lie on back, cross ankle over opposite knee. Glutes get intensely sore after lunges
-                and hip thrusts — this gives almost instant relief.</div>
-            </div>
-            <div class="mob-hold">45 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Gastrocnemius_Calf_Stretch/0.jpg"
-              alt="Calf Stretch" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Calf stretch (wall)</div>
-              <div class="mob-note">After HIIT sprints on Saturday, calf tightness is very common. Unaddressed calf
-                tightness leads to shin splints — stretch them every time.</div>
-            </div>
-            <div class="mob-hold">40 sec each</div>
-          </div>
-          <div class="mob-row">
-            <img class="mob-thumb"
-              src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Hip_Flexor/0.jpg"
-              alt="Hip Flexor" loading="lazy" onclick="openModal(this.src)">
-            <div class="mob-info">
-              <div class="mob-name">Kneeling hip flexor stretch</div>
-              <div class="mob-note">Hip flexors control how your legs move during squats. If they're tight, your lower
-                back compensates. A must after every leg day.</div>
-            </div>
-            <div class="mob-hold">45 sec each</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Foam rolling tip -->
-      <div class="section-label">Bonus: foam rolling (if available at gym)</div>
-      <div class="tips-card">
-        <h3 style="font-size:14px; color:var(--muted); font-weight:500; margin-bottom:10px;">Do this before your dynamic
-          warm-up — 5 min</h3>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--purple)"></div>
-          <div><span class="tip-strong">Quads</span> — 30–40 sec each leg. Slow rolls, pause on tight spots. Reduces
-            DOMS from squats significantly.</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--purple)"></div>
-          <div><span class="tip-strong">Upper back (thoracic)</span> — Roll from mid-back to shoulders. Counteracts desk
-            posture and tightness from bench press.</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--purple)"></div>
-          <div><span class="tip-strong">Glutes</span> — Sit on roller, cross one ankle over opposite knee, roll.
-            Releases the deep glute tension that causes lower back pain.</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--purple)"></div>
-          <div><span class="tip-strong">Calves</span> — Stack one leg on the other for more pressure. 30 sec each.
-            Prevents shin splints from HIIT sessions.</div>
-        </div>
-        <div class="tip-item" style="border-bottom:none;">
-          <div class="tip-dot" style="background:var(--purple)"></div>
-          <div><span class="tip-strong">Rule:</span> Roll slowly (1 inch/sec). If you hit a painful spot, stop and hold
-            20–30 sec — don't roll through it. Never roll directly on joints or the lower spine.</div>
-        </div>
-      </div>
-
     </div>
-    <!-- ═══ END MOBILITY TAB ═══ -->
 
-    <!-- ═══ TRACKER TAB ═══ -->
-    <div id="tab-tracker" class="tab-panel">
-      <div class="alert alert-success" style="margin-top:8px;">Tick off each habit daily. Consistency over 30 days
-        transforms the body. These are the non-negotiables that actually move the needle.</div>
-
-      <div class="section-label">Today's checklist</div>
-      <div class="tips-card">
-        <ul class="checklist" id="checklist">
-          <li onclick="toggleCheck(this)">
-            <div class="check-box">✓</div><span>Drank warm lemon water on waking</span>
-          </li>
-          <li onclick="toggleCheck(this)">
-            <div class="check-box">✓</div><span>Ate breakfast — did not skip</span>
-          </li>
-          <li onclick="toggleCheck(this)">
-            <div class="check-box">✓</div><span>Hit 3.5L water intake</span>
-          </li>
-          <li onclick="toggleCheck(this)">
-            <div class="check-box">✓</div><span>Completed today's gym session</span>
-          </li>
-          <li onclick="toggleCheck(this)">
-            <div class="check-box">✓</div><span>Did 10-min morning back routine</span>
-          </li>
-          <li onclick="toggleCheck(this)">
-            <div class="check-box">✓</div><span>Stood up from desk every 90 minutes</span>
-          </li>
-          <li onclick="toggleCheck(this)">
-            <div class="check-box">✓</div><span>Kept dinner low-carb</span>
-          </li>
-          <li onclick="toggleCheck(this)">
-            <div class="check-box">✓</div><span>No junk / fried food today</span>
-          </li>
-          <li onclick="toggleCheck(this)">
-            <div class="check-box">✓</div><span>No caffeine after 7 PM</span>
-          </li>
-          <li onclick="toggleCheck(this)">
-            <div class="check-box">✓</div><span>Screens off 30 min before bed</span>
-          </li>
-          <li onclick="toggleCheck(this)">
-            <div class="check-box">✓</div><span>In bed by 1:00 AM — wind down starts 12:30 AM</span>
-          </li>
-        </ul>
+    <!-- Day 4 -->
+    <div class="day-card" id="d6">
+      <div class="day-header" onclick="toggleDay('d6')">
+        <div class="day-number">04</div>
+        <div>
+          <div class="day-name">Saturday <span class="badge badge-hiit">Lower + HIIT</span></div>
+          <div class="ex-note">Fat burner day 🔥</div>
+        </div>
+        <div class="day-focus">~75 min</div>
+        <span class="chevron">▼</span>
       </div>
-
-      <div id="progress-area" style="margin-top:20px; text-align:center;">
-        <div style="font-family:var(--font-display); font-size:48px; color:var(--accent)" id="score-display">0/11</div>
-        <div style="font-size:13px; color:var(--muted); margin-top:4px;" id="score-msg">Start checking off your habits!
+      <div class="day-body">
+        <div class="ex-row">
+          <div><div class="ex-name">Goblet squat</div></div>
+          <div class="ex-sets">4 × 12</div>
         </div>
-        <div
-          style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); height:10px; margin-top:14px; overflow:hidden;">
-          <div id="progress-bar"
-            style="height:100%; background:var(--accent); border-radius:var(--radius); width:0%; transition:width .4s cubic-bezier(.4,0,.2,1);">
-          </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Step-ups (box / bench)</div></div>
+          <div class="ex-sets">3 × 12 each</div>
         </div>
-      </div>
-
-      <div class="section-label" style="margin-top:32px;">Quick reference</div>
-      <div class="ref-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div class="tips-card" style="padding:14px 16px;">
-          <h3 style="font-size:13px; margin-bottom:8px; color:var(--muted)">WORKOUT SPLIT</h3>
-          <div style="font-size:13px; line-height:2;">
-            Mon — Upper Push<br>Tue — Lower Body<br>Wed — Rest<br>Thu — Upper Pull<br>Fri — Rest<br>Sat — Lower +
-            HIIT<br>Sun — Full Rest
-          </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Hip thrust / glute bridge</div><div class="ex-note">Also strengthens lower back</div></div>
+          <div class="ex-sets">3 × 15</div>
         </div>
-        <div class="tips-card" style="padding:14px 16px;">
-          <h3 style="font-size:13px; margin-bottom:8px; color:var(--muted)">DAILY TARGETS</h3>
-          <div style="font-size:13px; line-height:2;">
-            Calories — 1,850<br>Protein — 130g<br>Carbs — 190g<br>Fats — 60g<br>Water — 3.5L<br>Sleep — 1 AM → 8 AM<br>Deficit — ~500 kcal
-          </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Calf raises</div></div>
+          <div class="ex-sets">4 × 20</div>
+        </div>
+        <div class="ex-row">
+          <div><div class="ex-name">HIIT treadmill: 30s sprint / 60s walk</div><div class="ex-note" style="color:var(--orange)">Adjust pace and rounds to tolerance; keep form and recovery under control</div></div>
+          <div class="ex-sets">20 min</div>
+        </div>
+        <div class="ex-row">
+          <div><div class="ex-name">Hanging knee raises + Bicycle crunches</div></div>
+          <div class="ex-sets">3 × 15</div>
         </div>
       </div>
     </div>
 
-    <!-- ═══ GITIGNORE TAB ═══ -->
-    <div id="tab-gitignore" class="tab-panel">
-      <div class="alert alert-info" style="margin-top:8px;">
-        A developer's mindset applied to fitness. Some things are just noise — they don't belong in your commits.
-        Add these to your personal <code>.gitignore</code> to stay focused on what matters.
-      </div>
-
-      <div class="section-label">Your Journey's .gitignore</div>
-      
-      <div class="ignore-block">
-        <div class="ignore-line"><span>01</span> <strong>daily_weight_fluctuations/</strong> <span class="ignore-comment"># Water weight is not fat</span></div>
-        <div class="ignore-line"><span>02</span> <strong>perfect_gym_lighting/</strong> <span class="ignore-comment"># Real progress happens in the dark</span></div>
-        <div class="ignore-line"><span>03</span> <strong>other_peoples_progress/</strong> <span class="ignore-comment"># Comparison is the thief of gains</span></div>
-        <div class="ignore-line"><span>04</span> <strong>junk_food_guilt.log</strong> <span class="ignore-comment"># Log it, learn, and move on. No guilt.</span></div>
-        <div class="ignore-line"><span>05</span> <strong>fake_natty_influencers/</strong> <span class="ignore-comment"># Unrealistic expectations ignored</span></div>
-        <div class="ignore-line"><span>06</span> <strong>temporary_setbacks/</strong> <span class="ignore-comment"># One bad meal doesn't ruin a year</span></div>
-        <div class="ignore-line"><span>07</span> <strong>magic_pills/</strong> <span class="ignore-comment"># Supplements are 5%, work is 95%</span></div>
-        <div class="ignore-line"><span>08</span> <strong>overnight_results/</strong> <span class="ignore-comment"># Patience is a required dependency</span></div>
-        <div class="ignore-line"><span>09</span> <strong>broken_habits/*.tmp</strong> <span class="ignore-comment"># Today is a fresh build</span></div>
-        <div class="ignore-line"><span>10</span> <strong>"I'll start Monday"</strong> <span class="ignore-comment"># Start now. Commit immediately.</span></div>
-      </div>
-
-      <div class="tips-card" style="margin-top:16px;">
-        <h3 style="font-size:14px; margin-bottom:8px; color:var(--accent);">How to use this list</h3>
-        <p style="font-size:13px; color:var(--muted); line-height:1.6;">
-          In software, a <code>.gitignore</code> tells Git to ignore files that are unnecessary or sensitive.
-          In fitness, your brain often tracks "noise" that slows you down. By consciously choosing to 
-          <strong>ignore</strong> these items, you free up mental bandwidth for the habits that actually 
-          work: sleep, protein, and consistency.
-        </p>
-      </div>
-
-      <div class="section-label">Clean build checklist</div>
-      <div class="tips-card">
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--green)"></div>
-          <div><span class="tip-strong">Focus on the trend</span>, not the daily number.</div>
+    <!-- Sunday -->
+    <div class="day-card" id="d7">
+      <div class="day-header" onclick="toggleDay('d7')">
+        <div class="day-number">—</div>
+        <div>
+          <div class="day-name">Sunday <span class="badge badge-rest">Full Rest</span></div>
+          <div class="ex-note">Recover & reset</div>
         </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--blue)"></div>
-          <div><span class="tip-strong">Compare yourself to yesterday</span>, not a screen.</div>
-        </div>
-        <div class="tip-item">
-          <div class="tip-dot" style="background:var(--orange)"></div>
-          <div><span class="tip-strong">Forgive the bugs</span> (bad meals) and keep shipping.</div>
-        </div>
+        <div class="day-focus">Off</div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <p class="rest-note">Sleep in, light walk, foam roll, back stretches. This is when your muscles actually grow and fat metabolism resets. Protect this day.</p>
       </div>
     </div>
-
-  </main>
-
-  <footer>
-    Built for personal use · Male · 26 yrs · 75 kg · 173 cm · Goal: Get lean<br>
-    <span style="color:var(--accent)">Consistency beats intensity. Every single time.</span>
-  </footer>
-
-  <!-- Floating Action Button -->
-  <div class="fab-container" id="fabContainer">
-    <div class="fab-menu">
-      <div class="fab-item" onclick="switchTabFromFab('workout')">💪 Workout</div>
-      <div class="fab-item" onclick="switchTabFromFab('diet')">🥗 Diet Plan</div>
-      <div class="fab-item" onclick="switchTabFromFab('desk')">🪑 Desk & Back</div>
-      <div class="fab-item" onclick="switchTabFromFab('sleep')">😴 Sleep</div>
-      <div class="fab-item" onclick="switchTabFromFab('mobility')">🧘 Mobility</div>
-      <div class="fab-item" onclick="switchTabFromFab('tracker')">✅ Tracker</div>
-      <div class="fab-item" onclick="switchTabFromFab('gitignore')">🚫 Gitignore</div>
-    </div>
-    <button class="fab-btn" onclick="toggleFab()" aria-label="Quick Navigation">+</button>
   </div>
 
-  <!-- Image Modal -->
-  <div class="img-modal-overlay" id="imgModal" onclick="closeModal()">
-    <button class="img-modal-close" onclick="closeModal()">✕</button>
-    <img id="imgModalSrc" src="" alt="Exercise preview">
+  <!-- ═══ DIET TAB ═══ -->
+  <div id="tab-diet" class="tab-panel">
+    <div class="alert alert-warn" style="margin-top:8px;">Breakfast is included here as a consistency tool. If meal timing changes, keep the same overall calories and protein target instead of treating this schedule as universal.</div>
+
+    <div class="macro-split">
+      <div style="flex-shrink:0; text-align:center; min-width:80px;">
+        <div style="font-family:var(--font-display); font-size:40px; line-height:1; color:var(--accent)">1,850</div>
+        <div style="font-size:11px; color:var(--muted); letter-spacing:.06em; text-transform:uppercase">kcal / day</div>
+      </div>
+      <div class="macro-bar-wrap">
+        <div class="macro-bar-label"><span style="color:var(--red)">Protein 130g</span><span style="color:var(--muted)">25%</span></div>
+        <div class="macro-bar-track"><div class="macro-bar-fill" style="width:25%; background:var(--red)"></div></div>
+        <div class="macro-bar-label"><span style="color:var(--orange)">Carbs 190g</span><span style="color:var(--muted)">40%</span></div>
+        <div class="macro-bar-track"><div class="macro-bar-fill" style="width:40%; background:var(--orange)"></div></div>
+        <div class="macro-bar-label"><span style="color:var(--green)">Fats 60g</span><span style="color:var(--muted)">35%</span></div>
+        <div class="macro-bar-track" style="margin-bottom:0"><div class="macro-bar-fill" style="width:35%; background:var(--green)"></div></div>
+      </div>
+    </div>
+
+    <div class="section-label">Daily meal plan</div>
+
+    <div class="meal-card">
+      <div class="meal-time">On waking · 6:30–7:00 AM</div>
+      <div class="meal-main">1 glass warm water + juice of ½ lemon</div>
+      <div class="meal-alt">Kick-starts digestion and reduces morning bloating</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">Breakfast · 7:00–7:30 AM <span class="meal-kcal">~400 kcal</span> <span style="color:var(--red); font-size:11px; font-weight:600">DON'T SKIP</span></div>
+      <div class="meal-main">4 egg whites + 2 whole eggs scrambled / omelette</div>
+      <div class="meal-alt">+ 2 multigrain toast OR 1 bowl oats with milk &amp; banana<br>Prep time under 10 min. Set an alarm and stick to it.</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">Mid-morning snack · 10:30 AM <span class="meal-kcal">~150 kcal</span></div>
+      <div class="meal-main">Greek yogurt (plain, low fat) + 10–12 almonds</div>
+      <div class="meal-alt">OR 1 banana + black coffee (no sugar)</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">Lunch · 1:00–2:00 PM <span class="meal-kcal">~550 kcal</span></div>
+      <div class="meal-main">150–180g grilled chicken breast / fish (rohu, surmai, or salmon)</div>
+      <div class="meal-alt">+ 1 cup brown rice OR 2 rotis + sabzi + salad + curd<br>Avoid creamy gravies — opt for grilled, tandoori, or dry preparations</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">Pre-workout snack · 5:00–5:30 PM <span class="meal-kcal">~200 kcal</span></div>
+      <div class="meal-main">1 banana + 1 scoop whey protein in water</div>
+      <div class="meal-alt">OR boiled eggs (2) + 1 slice toast if no protein powder</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">Post-workout · 8:00–8:30 PM <span class="meal-kcal">~100 kcal</span></div>
+      <div class="meal-main">1 scoop whey protein in water / low-fat milk</div>
+      <div class="meal-alt">Within 30–45 min of finishing workout for best muscle recovery</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">Dinner · 9:00–9:30 PM <span class="meal-kcal">~450 kcal</span></div>
+      <div class="meal-main">Grilled chicken / fish / eggs + sautéed vegetables</div>
+      <div class="meal-alt">+ 1 roti OR skip roti and have a larger protein + veggie portion<br><strong style="color:var(--orange)">Dinner is intentionally lighter here</strong> to make the overall day easier to manage.</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">Before bed (optional) <span class="meal-kcal">~50 kcal</span></div>
+      <div class="meal-main">1 glass warm milk with a pinch of turmeric</div>
+      <div class="meal-alt">Aids recovery and sleep quality</div>
+    </div>
+
+    <div class="alert alert-danger" style="margin-top:16px;"><strong>Avoid:</strong> Sugary drinks, alcohol, fried food, biscuits/chips at your desk, late-night eating after 10 PM. These are the classic desk-job belly fat traps.</div>
   </div>
 
-  <script>
-    // ── TAB SWITCHING ──
-    function switchTab(name, btn) {
-      document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      document.getElementById('tab-' + name).classList.add('active');
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      // Re-trigger reveal animations in newly active panel
-      setTimeout(initScrollReveal, 100);
-    }
+  <!-- ═══ DESK & BACK TAB ═══ -->
+  <div id="tab-desk" class="tab-panel">
+    <div class="alert alert-warn" style="margin-top:8px;">This section is a simple movement checklist for long desk days. It may help comfort and posture, but it is not a substitute for medical advice if pain persists.</div>
 
-    function switchTabFromFab(name) {
-      const btn = document.querySelector('.tab-btn[data-tab="' + name + '"]');
-      if (btn) switchTab(name, btn);
-      closeFab();
-    }
+    <div class="section-label">At-desk routine — every 90 minutes</div>
+    <div class="tips-card">
+      <h3>Set a phone alarm every 90 min ⏰</h3>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--blue)"></div>
+        <div><span class="tip-strong">Stand up and walk</span> — 2–3 min around your floor. Non-negotiable.</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--blue)"></div>
+        <div><span class="tip-strong">Seated cat-cow stretch</span> — arch and round your back 10 times slowly</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--blue)"></div>
+        <div><span class="tip-strong">Neck rolls</span> — slow, controlled, 5 each side</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--blue)"></div>
+        <div><span class="tip-strong">Shoulder blade squeeze</span> — pinch blades together, hold 5 sec, 10 reps</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--blue)"></div>
+        <div><span class="tip-strong">Hip flexor stretch</span> — step one foot forward, push hips forward gently, 30 sec each side</div>
+      </div>
+    </div>
 
-    // ── FAB CONTROLS ──
-    function toggleFab() {
-      document.getElementById('fabContainer').classList.toggle('open');
-    }
-    function closeFab() {
-      document.getElementById('fabContainer').classList.remove('open');
-    }
-    document.addEventListener('click', function(e) {
-      const fab = document.getElementById('fabContainer');
-      if (!fab.contains(e.target)) closeFab();
-    });
+    <div class="section-label">10-min morning back routine — every day</div>
+    <div class="tips-card">
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--green)"></div>
+        <div><span class="tip-strong">Child's pose</span> — 60 seconds, decompresses the spine</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--green)"></div>
+        <div><span class="tip-strong">Cat-cow on all fours</span> — 10 reps slow, morning mobility</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--green)"></div>
+        <div><span class="tip-strong">Bird dog</span> — 10 reps each side, strengthens deep core + lower back safely</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--green)"></div>
+        <div><span class="tip-strong">Glute bridge</span> — 3 × 15 reps, activates glutes which support the spine</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--green)"></div>
+        <div><span class="tip-strong">Dead bug</span> — 10 reps each side, safest core exercise for bad backs</div>
+      </div>
+    </div>
 
-    // ── CARD TOGGLES ──
-    function toggleDay(id) {
-      document.getElementById(id).classList.toggle('open');
-    }
+    <div class="section-label">Desk setup fixes — do today</div>
+    <div class="tips-card">
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--orange)"></div>
+        <div>Screen at eye level — stack books under laptop if needed</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--orange)"></div>
+        <div>Sit with feet flat on floor, hips slightly above knees</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--orange)"></div>
+        <div>Small rolled towel or lumbar cushion behind lower back</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--orange)"></div>
+        <div>Phone alarm every 90 min as "stand up" reminder</div>
+      </div>
+    </div>
+  </div>
 
-    function toggleMob(id) {
-      document.getElementById(id).classList.toggle('open');
-    }
+  <!-- ═══ SLEEP & STRESS TAB ═══ -->
+  <div id="tab-sleep" class="tab-panel">
+    <div class="alert alert-danger" style="margin-top:8px;">Sleep and stress management affect recovery, appetite, and training consistency. This section is included because those habits usually shape adherence more than any single workout.</div>
 
-    // ── CHECKLIST ──
-    function toggleCheck(li) {
-      li.classList.toggle('done');
-      updateScore();
-    }
+    <div class="section-label">Sleep protocol — target 7.5 hrs</div>
+    <div class="tips-card">
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--blue)"></div>
+        <div>Fixed sleep window: <span class="tip-strong">10:30 PM → 6:00 AM</span> — consistency matters more than duration</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--blue)"></div>
+        <div>No screens 30 min before bed — switch to reading or stretching</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--blue)"></div>
+        <div>Room temperature ~22–24°C and dark — improves sleep quality dramatically</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--blue)"></div>
+        <div>No caffeine after 3 PM — it stays in your system for 6+ hours</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--blue)"></div>
+        <div>1 glass warm turmeric milk at bedtime — aids recovery and sleep</div>
+      </div>
+    </div>
 
-    function updateScore() {
-      const total = document.querySelectorAll('#checklist li').length;
-      const done = document.querySelectorAll('#checklist li.done').length;
-      document.getElementById('score-display').textContent = done + '/' + total;
-      document.getElementById('progress-bar').style.width = Math.round(done / total * 100) + '%';
-      const msgs = [
-        'Start checking off your habits!',
-        'Good start — keep going!',
-        'Building momentum 💪',
-        "You're on track!",
-        'Solid effort today!',
-        'More than halfway there!',
-        'Looking strong 🔥',
-        'Almost there — push through!',
-        'Excellent discipline!',
-        'Nearly a perfect day!',
-        'Nearly a perfect day!',
-        '🏆 Perfect day! This is what transformation looks like.'
-      ];
-      document.getElementById('score-msg').textContent = msgs[done] || msgs[msgs.length - 1];
-    }
+    <div class="section-label">Beating stress eating</div>
+    <div class="tips-card">
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--red)"></div>
+        <div><span class="tip-strong">Never sit hungry at your desk</span> — keep roasted chana, almonds, or fruit at your desk always</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--red)"></div>
+        <div><span class="tip-strong">The 10-minute rule</span> — when a craving hits, drink water and wait 10 min. 70% of cravings pass</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--red)"></div>
+        <div><span class="tip-strong">Don't stock junk at home</span> — if it isn't there, you can't eat it at 11 PM</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--red)"></div>
+        <div><span class="tip-strong">Eat every 3–4 hours</span> — the meal plan prevents hunger spikes that cause stress eating</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-dot" style="background:var(--red)"></div>
+        <div><span class="tip-strong">Box breathing</span> — when stressed: 4 sec in, 4 hold, 4 out. Lowers cortisol fast</div>
+      </div>
+    </div>
 
-    // ── IMAGE MODAL ──
-    function openModal(src) {
-      const modal = document.getElementById('imgModal');
-      document.getElementById('imgModalSrc').src = src;
-      modal.classList.add('show');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeModal() {
-      const modal = document.getElementById('imgModal');
-      modal.classList.remove('show');
-      document.body.style.overflow = '';
-    }
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeModal();
-    });
+    <div class="section-label">Expected results</div>
+    <div class="tips-card">
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-label">Week 1–2</div><div class="tl-desc"><strong>Less bloating</strong>, more energy, better sleep quality</div></div>
+        <div class="tl-item"><div class="tl-label">Month 1</div><div class="tl-desc"><strong>2–3 kg down</strong>, belt fits looser, back pain reduces</div></div>
+        <div class="tl-item"><div class="tl-label">Month 2–3</div><div class="tl-desc"><strong>Visible waist definition</strong>, stronger core, better posture at desk</div></div>
+        <div class="tl-item"><div class="tl-label">Month 4–6</div><div class="tl-desc"><strong>6–8 kg fat loss</strong>, lean physique, belly visibly flat</div></div>
+      </div>
+    </div>
+  </div>
 
-    // ── SCROLL REVEAL ──
-    function initScrollReveal() {
-      const els = document.querySelectorAll('.day-card, .mob-card, .meal-card, .tips-card, .macro-grid, .macro-split, .alert, .pain-grid, .section-label');
-      els.forEach(el => {
-        if (!el.classList.contains('reveal')) {
-          el.classList.add('reveal');
-        }
-      });
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-      document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
-    }
+  <!-- ═══ TRACKER TAB ═══ -->
+  <div id="tab-tracker" class="tab-panel">
+    <div class="alert alert-success" style="margin-top:8px;">Tick off each habit daily. This tracker is meant as a personal accountability checklist, not a scorecard other people should copy exactly.</div>
 
-    // ── ANIMATED COUNT-UP FOR MACRO CARDS ──
-    function animateCountUp() {
-      const vals = document.querySelectorAll('.macro-card .val');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !entry.target.dataset.animated) {
-            entry.target.dataset.animated = 'true';
-            const text = entry.target.textContent;
-            const numMatch = text.match(/([\d,]+\.?\d*)/);
-            if (!numMatch) return;
-            const suffix = text.replace(numMatch[0], '');
-            const target = parseFloat(numMatch[0].replace(/,/g, ''));
-            const hasComma = numMatch[0].includes(',');
-            const duration = 1200;
-            const startTime = performance.now();
-            function animate(now) {
-              const elapsed = now - startTime;
-              const progress = Math.min(elapsed / duration, 1);
-              const eased = 1 - Math.pow(1 - progress, 4);
-              let current = Math.round(target * eased);
-              if (hasComma) {
-                current = current.toLocaleString();
-              }
-              entry.target.textContent = current + suffix;
-              if (progress < 1) requestAnimationFrame(animate);
-            }
-            requestAnimationFrame(animate);
-          }
-        });
-      }, { threshold: 0.5 });
-      vals.forEach(v => observer.observe(v));
-    }
+    <div class="section-label">Today's checklist</div>
+    <div class="tips-card">
+      <ul class="checklist" id="checklist">
+        <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span>Drank warm lemon water on waking</span></li>
+        <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span>Ate breakfast — did not skip</span></li>
+        <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span>Hit 3.5L water intake</span></li>
+        <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span>Completed today's gym session</span></li>
+        <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span>Did 10-min morning back routine</span></li>
+        <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span>Stood up from desk every 90 minutes</span></li>
+        <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span>Kept dinner low-carb</span></li>
+        <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span>No junk / fried food today</span></li>
+        <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span>No caffeine after 3 PM</span></li>
+        <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span>Screens off 30 min before bed</span></li>
+        <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span>In bed by 10:30 PM</span></li>
+      </ul>
+    </div>
 
-    // ── PARTICLE SYSTEM (HEADER) ──
-    function initParticles() {
-      const canvas = document.getElementById('headerParticles');
-      if (!canvas) return;
-      // Respect reduced motion
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    <div id="progress-area" style="margin-top:20px; text-align:center;">
+      <div style="font-family:var(--font-display); font-size:48px; color:var(--accent)" id="score-display">0/11</div>
+      <div style="font-size:13px; color:var(--muted); margin-top:4px;" id="score-msg">Start checking off your habits!</div>
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); height:10px; margin-top:14px; overflow:hidden;">
+        <div id="progress-bar" style="height:100%; background:var(--accent); border-radius:var(--radius); width:0%; transition:width .4s cubic-bezier(.4,0,.2,1);"></div>
+      </div>
+    </div>
 
-      const ctx = canvas.getContext('2d');
-      const header = canvas.parentElement;
-      let particles = [];
-      const PARTICLE_COUNT = 40;
-      let animationId = null;
+    <div class="section-label" style="margin-top:32px;">Quick reference</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <div class="tips-card" style="padding:14px 16px;">
+        <h3 style="font-size:13px; margin-bottom:8px; color:var(--muted)">WORKOUT SPLIT</h3>
+        <div style="font-size:13px; line-height:2;">
+          Mon — Upper Push<br>Tue — Lower Body<br>Wed — Rest<br>Thu — Upper Pull<br>Fri — Rest<br>Sat — Lower + HIIT<br>Sun — Full Rest
+        </div>
+      </div>
+      <div class="tips-card" style="padding:14px 16px;">
+        <h3 style="font-size:13px; margin-bottom:8px; color:var(--muted)">DAILY TARGETS</h3>
+        <div style="font-size:13px; line-height:2;">
+          Calories — 1,850<br>Protein — 130g<br>Carbs — 190g<br>Fats — 60g<br>Water — 3.5L<br>Sleep — 7.5 hrs<br>Deficit — ~500 kcal
+        </div>
+      </div>
+    </div>
+  </div>
 
-      function resize() {
-        canvas.width = header.offsetWidth;
-        canvas.height = header.offsetHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize);
+</main>
 
-      for (let i = 0; i < PARTICLE_COUNT; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.3,
-          r: Math.random() * 2 + 0.5,
-          alpha: Math.random() * 0.4 + 0.1
-        });
-      }
+<footer>
+  Built for personal use only.<br>
+  <span style="color:var(--accent)">Consistency beats intensity. Every single time.</span>
+</footer>
 
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0) p.x = canvas.width;
-          if (p.x > canvas.width) p.x = 0;
-          if (p.y < 0) p.y = canvas.height;
-          if (p.y > canvas.height) p.y = 0;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(232, 240, 74, ${p.alpha})`;
-          ctx.fill();
-        });
-        // Draw faint connections
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 120) {
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.strokeStyle = `rgba(232, 240, 74, ${0.06 * (1 - dist / 120)})`;
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
-            }
-          }
-        }
-        animationId = requestAnimationFrame(draw);
-      }
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-      // Only animate when header is visible
-      const headerObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            if (!animationId) draw();
-          } else {
-            if (animationId) {
-              cancelAnimationFrame(animationId);
-              animationId = null;
-            }
-          }
-        });
-      }, { threshold: 0 });
-      headerObserver.observe(header);
-    }
+  function toggleDay(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
 
-    // ── AUTO-OPEN TODAY'S DAY ──
-    (function () {
-      // JS getDay(): 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
-      // Day card IDs: d1=Mon, d2=Tue, d3=Wed, d4=Thu, d5=Fri, d6=Sat, d7=Sun
-      const dayMap = { 1: 'd1', 2: 'd2', 3: 'd3', 4: 'd4', 5: 'd5', 6: 'd6', 0: 'd7' };
-      const today = new Date().getDay();
-      const todayCardId = dayMap[today];
-      const card = document.getElementById(todayCardId);
-      if (card) {
-        card.classList.add('open', 'today-active');
-        // Scroll the card into view after a brief delay
-        setTimeout(() => {
-          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 300);
-      }
-    })();
+  function toggleCheck(li) {
+    li.classList.toggle('done');
+    updateScore();
+  }
 
-    // ── INITIALISE ALL SYSTEMS (single init guard) ──
-    let _initialized = false;
-    function initAll() {
-      if (_initialized) return;
-      _initialized = true;
-      initParticles();
-      initScrollReveal();
-      animateCountUp();
-    }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initAll);
-    } else {
-      initAll();
-    }
-  </script>
+  function updateScore() {
+    const total = document.querySelectorAll('#checklist li').length;
+    const done = document.querySelectorAll('#checklist li.done').length;
+    document.getElementById('score-display').textContent = done + '/' + total;
+    document.getElementById('progress-bar').style.width = Math.round(done / total * 100) + '%';
+    const msgs = [
+      'Start checking off your habits!',
+      'Good start — keep going!',
+      'Building momentum 💪',
+      "You're on track!",
+      'Solid effort today!',
+      'More than halfway there!',
+      'Looking strong 🔥',
+      'Almost there — push through!',
+      'Excellent discipline!',
+      'Nearly a perfect day!',
+      'Nearly a perfect day!',
+      '🏆 Perfect day! This is what transformation looks like.'
+    ];
+    document.getElementById('score-msg').textContent = msgs[done] || msgs[msgs.length - 1];
+  }
+</script>
 </body>
-
 </html>
