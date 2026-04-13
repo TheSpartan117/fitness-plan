@@ -1,6 +1,7 @@
 # Fitness Plan
 
 A simple, flexible repository to store and manage fitness plans, workouts, and progress tracking templates. This README provides an overview, quick start instructions, examples, and contribution guidelines so others can use and extend the project.
+Available here: https://thespartan117.github.io/fitness-plan/
 
 ## Features
 
